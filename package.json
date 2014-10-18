@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Studying Finnish to English translation through TDD",
   "authors": ["Tommy Sullivan <tom@tommysullivan.me>", "Esa-Matti Tastula <tastulae@mail.usf.edu>"],
+  "repository": "https://github.com/vitenter/finnish-english-translation",
   "dependencies": {
     "collections": "vitenter/collections"
   },
