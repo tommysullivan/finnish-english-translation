@@ -30,9 +30,8 @@
     ["susi", "sudet"],
     ["kulta", "kullat"],
     ["Tommi", "Tommit"],
-    ["tietokone", "tietokoneet"],
     ["auer", "autereet"],
-    ["poika", "poijat"],
+    ["poika", "pojat"],
     ["tytto", "tytot"],
     ["jalka", "jalat"],
     ["tietokone", "tietokoneet"],
@@ -40,6 +39,6 @@
     ["saari", "saaret"],
     ["kirje", "kirjeet"],
     ["hammas", "hampaat"],
-    ["piene", "pienet"],
+    ["pieni", "pienet"],
     ["paita", "paidat"]
 ]
