@@ -1,1 +1,1 @@
-node_modules/jasmine-node/bin/jasmine-node spec --verbose
+node_modules/jasmine-node/bin/jasmine-node spec/**/* --verbose

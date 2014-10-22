@@ -1,5 +1,6 @@
-var finnishEnglishTranslation = require('../finnishEnglishTranslation');
-var pluralizer = finnishEnglishTranslation.Pluralizer();
+var FinnishEnglishTranslation = require('../../finnishEnglishTranslation');
+var finnishEnglishTranslation = FinnishEnglishTranslation();
+var pluralizer = finnishEnglishTranslation.createPluralizer();
 var stemPluralPairs = finnishEnglishTranslation.stemPluralPairs();
 
 describe('Pluralizer', function() {
