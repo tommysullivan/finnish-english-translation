@@ -9,11 +9,11 @@ module.exports = function() {
         createPluralizer: function() {
             var simpleTransformRulesFileContent = fs.readFileSync('./configuration/simple-transform-rules.json');
             var simpleTransformRulesJSONArray = JSON.parse(simpleTransformRulesFileContent);
+            var simpleTransformRulesCollection = Collection(simpleTransformRulesJSONArray);
             function mapperFunction(arrayOfPreAndPostSuffix) {
                 return SimpleTransformRule(arrayOfPreAndPostSuffix[0], arrayOfPreAndPostSuffix[1]); 
             }
-            var simpleTransformRulesInstanceArray = simpleTransformRulesJSONArray.map(mapperFunction);
-            var rulesCollection = Collection(simpleTransformRulesInstanceArray);
+            var rulesCollection = simpleTransformRulesCollection.map(mapperFunction);
             return Pluralizer(rulesCollection);
         },
         stemPluralPairs: function() {
