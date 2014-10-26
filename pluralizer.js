@@ -1,13 +1,15 @@
-module.exports = function(pluralRules) {
+module.exports = function(collectionOfSimpleTransformRules) {
     return {
-        pluralize: function(stem) {
-            var applicableRules = pluralRules.filter(function(rule) {
+        pluralize: function(stem) { 
+            function doesRuleApplyToStem(rule) {
                 return rule.applies(stem);
-            });
+            }
+            var applicableRules = collectionOfSimpleTransformRules.filter(doesRuleApplyToStem);
             if(applicableRules.isEmpty()) return stem + 't';
-            var plurals = applicableRules.map(function(rule) {
+            function applyRuleToStem(rule) {
                 return rule.apply(stem)+'t';
-            });
+            }
+            var plurals = applicableRules.map(applyRuleToStem);
             if(plurals.unique().length() != 1) {
                 throw new Error(
                     "Multiple rules applied and gave different results for stem "+stem+"\n"+
@@ -17,10 +19,10 @@ module.exports = function(pluralRules) {
             return plurals.first();
         },
         complexity: function() {
-            return pluralRules.map(function(rule) { return rule.complexity() }).fold(function(a,b) { return a + b }, 0);
+            return collectionOfSimpleTransformRules.map(function(rule) { return rule.complexity() }).fold(function(a,b) { return a + b }, 0);
         },
         numTopLevelRules: function() {
-            return pluralRules.length();
+            return collectionOfSimpleTransformRules.length();
         }
     }
 }
