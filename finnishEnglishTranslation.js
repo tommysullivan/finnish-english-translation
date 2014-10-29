@@ -7,6 +7,7 @@ var ComplexityAnalyzer = require('./complexityAnalyzer');
 var RuleLoader = require('./ruleLoader');
 var Stemifier = require('./stemifier');
 var RuleThatAppendsStringAfterNestedRule = require('./ruleThatAppendsStringAfterNestedRule');
+var DoNothingRule = require('./doNothingRule');
 var fs = require('fs');
 
 module.exports = function() {
@@ -16,15 +17,17 @@ module.exports = function() {
     return {
         createPluralizer: function() {
             var collectionOfSimpleTransformRules = createRuleLoader().loadRules('./configuration/plural-rules.json');
+            var pluralizationLetter = 't';
             function addTAppendBehaviorToRule(rule) {
-                return RuleThatAppendsStringAfterNestedRule(rule, 't');
+                return RuleThatAppendsStringAfterNestedRule(rule, pluralizationLetter);
             }
             collectionOfSimpleTransformRules = collectionOfSimpleTransformRules.map(addTAppendBehaviorToRule);
-            return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules));
+            var ruleToApplyIfNoRulesAreApplicable = RuleThatAppendsStringAfterNestedRule(DoNothingRule(), pluralizationLetter);
+            return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules, ruleToApplyIfNoRulesAreApplicable));
         },
         createStemifier: function() {
             var collectionOfSimpleTransformRules = createRuleLoader().loadRules('./configuration/stem-rules.json');
-            return Stemifier(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules));
+            return Stemifier(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules, DoNothingRule()));
         }
     }
 }

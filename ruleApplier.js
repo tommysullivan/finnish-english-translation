@@ -1,11 +1,11 @@
-module.exports = function(collectionOfSimpleTransformRules) {
+module.exports = function(collectionOfSimpleTransformRules, ruleToApplyIfNoRulesAreApplicable) {
     return {
-        applyRules: function(inputWord, ruleToApplyIfNoRulesAreApplicable) {
+        applyRules: function(inputWord) {
             function doesRuleApplyToStem(rule) {
                 return rule.applies(inputWord);
             }
             var applicableRules = collectionOfSimpleTransformRules.filter(doesRuleApplyToStem);
-            if(applicableRules.isEmpty()) return ruleToApplyIfNoRulesAreApplicable(inputWord);
+            if(applicableRules.isEmpty()) return ruleToApplyIfNoRulesAreApplicable.apply(inputWord);
             function applyRuleToStem(rule) {
                 return rule.apply(inputWord);
             }
