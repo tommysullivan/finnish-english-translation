@@ -7,7 +7,7 @@ module.exports = function(collectionOfSimpleTransformRules) {
             var applicableRules = collectionOfSimpleTransformRules.filter(doesRuleApplyToStem);
             if(applicableRules.isEmpty()) return ruleToApplyIfNoRulesAreApplicable(inputWord);
             function applyRuleToStem(rule) {
-                return rule.apply(inputWord)+'t';
+                return rule.apply(inputWord);
             }
             var resultCandidates = applicableRules.map(applyRuleToStem);
             if(resultCandidates.unique().length() != 1) {
