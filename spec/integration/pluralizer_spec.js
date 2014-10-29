@@ -1,10 +1,7 @@
 var FinnishEnglishTranslation = require('../../finnishEnglishTranslation');
-var configurationPath = '.';
-var finnishEnglishTranslation = FinnishEnglishTranslation(configurationPath);
+var finnishEnglishTranslation = FinnishEnglishTranslation();
 var pluralizer = finnishEnglishTranslation.createPluralizer();
 var fs = require('fs');
-
-//load test data
 var stemPluralPairs = JSON.parse(fs.readFileSync('./spec/integration/test-data/stem-plural-pairs.json'));
 
 describe('Pluralizer', function() {

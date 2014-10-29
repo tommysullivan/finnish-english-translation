@@ -2,22 +2,22 @@ var collections = require('collections');
 var Collection = collections.Collection;
 var SimpleTransformRule = require('./simpleTransformRule');
 var Pluralizer = require('./pluralizer');
+var RuleApplier = require('./ruleApplier.js');
+var ComplexityAnalyzer = require('./complexityAnalyzer');
+var RuleLoader = require('./ruleLoader');
 var fs = require('fs');
 
-module.exports = function(configurationPath) {
+module.exports = function() {
+    function createRuleLoader() {
+        return RuleLoader(Collection, SimpleTransformRule, fs);
+    }
     return {
         createPluralizer: function() {
-            var simpleTransformRulesFileContent = fs.readFileSync(configurationPath+'/configuration/simple-transform-rules.json');
-            var simpleTransformRulesJSONArray = JSON.parse(simpleTransformRulesFileContent);
-            var collectionOfArraysOfSuffices = Collection(simpleTransformRulesJSONArray);
-            function changeInnerArrayToSimpleTransformRule(arrayOfPreAndPostSuffix) {
-                //this gets called once for each nested array in the array of arrays
-                var oldSuffix = arrayOfPreAndPostSuffix[0];
-                var newSuffix = arrayOfPreAndPostSuffix[1];
-                return SimpleTransformRule(oldSuffix, newSuffix); //this is the new element in the "mapped" result collection
-            }
-            var collectionOfSimpleTransformRules = collectionOfArraysOfSuffices.map(changeInnerArrayToSimpleTransformRule);
-            return Pluralizer(collectionOfSimpleTransformRules);
+            var collectionOfSimpleTransformRules = createRuleLoader().loadRules('./configuration/plural-rules.json');
+            return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules));
+        },
+        createStemifier: function() {
+            
         }
     }
 }
