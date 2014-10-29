@@ -5,6 +5,7 @@ var Pluralizer = require('./pluralizer');
 var RuleApplier = require('./ruleApplier.js');
 var ComplexityAnalyzer = require('./complexityAnalyzer');
 var RuleLoader = require('./ruleLoader');
+var Stemifier = require('./stemifier');
 var fs = require('fs');
 
 module.exports = function() {
@@ -17,7 +18,8 @@ module.exports = function() {
             return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules));
         },
         createStemifier: function() {
-            
+            var collectionOfSimpleTransformRules = createRuleLoader().loadRules('./configuration/stem-rules.json');
+            return Stemifier(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules));
         }
     }
 }
