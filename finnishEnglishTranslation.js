@@ -7,6 +7,7 @@ var ComplexityAnalyzer = require('./complexityAnalyzer');
 var RuleLoader = require('./ruleLoader');
 var RuleThatAppendsString = require('./ruleThatAppendsString');
 var RuleDecorator = require('./ruleDecorator');
+var PresentTenseConjugator = require('./presentTenseConjugator');
 var fs = require('fs');
 
 module.exports = function() {
@@ -22,6 +23,12 @@ module.exports = function() {
             }
             collectionOfSimpleTransformRules = collectionOfSimpleTransformRules.map(addTAppendBehaviorToRule);
             return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules, ruleThatAppendsT));
+        },
+        createPresentTenseConjugator: function() {
+            var stemRulesFileContent = fs.readFileSync('./configuration/stem-rules.json');
+            var arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
+            var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
+            return PresentTenseConjugator(collectionOfVerbConfigurations);
         }
     }
 }

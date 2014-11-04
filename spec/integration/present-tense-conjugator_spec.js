@@ -1,10 +1,8 @@
-var PresentTenseConjugator = require('../../presentTenseConjugator');
+var FinnishEnglishTranslation = require('../../finnishEnglishTranslation');
+var finnishEnglishTranslator = FinnishEnglishTranslation();
+var presentTenseConjugator = finnishEnglishTranslator.createPresentTenseConjugator();
 
 describe('PresentTenseConjugator', function() {
-    var presentTenseConjugator;
-    beforeEach(function() {
-        presentTenseConjugator = PresentTenseConjugator();
-    });
     describe('conjugate(infinitive, person)', function() {
         //TODO: Maybe we should test different capitalizations!
         function expectConjugation(infinitive, pronoun, expected) {
@@ -24,5 +22,8 @@ describe('PresentTenseConjugator', function() {
         }
         expectInfinitiveConjugations('elää', ['elän', 'elät', 'elää', 'elämme', 'elätte', 'elävät']);
         expectInfinitiveConjugations('soutaa', ['soudan', 'soudat', 'soutaa', 'soudamme', 'soudatte', 'soutavat']);
+        expectInfinitiveConjugations('takellella', ['takeltelen', 'takeltelet', 'takeltelee', 'takeltelemme', 'takeltelette', 'takeltelevat']);
+        expectInfinitiveConjugations('kokea', ['koen', 'koet', 'kokee', 'koemme', 'koette', 'kokevat']);
+        expectInfinitiveConjugations('voida', ['voin', 'voit', 'voi', 'voimme', 'voitte', 'voivat']);
     });
 });

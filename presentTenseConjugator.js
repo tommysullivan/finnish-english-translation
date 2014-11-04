@@ -1,21 +1,22 @@
-module.exports = function() {
+module.exports = function(collectionOfVerbConfigurations) {
     return {
-        conjugate: function(infinitive,pronoun) {
+        conjugate: function(infinitive, pronoun) {
             pronoun = pronoun.toLowerCase();
             function conjugateStem(strongStem, weakStem, pronoun) {
+                var endsInDa = infinitive.substring(infinitive.length-2) == 'da'
+                var letterToAppendToThirdPerson = endsInDa ? '' : strongStem.charAt(strongStem.length-1);
                 var aToUse = strongStem.indexOf('ä')!=-1 ? 'ä' : 'a';
-                if(pronoun=='minä') return weakStem + 'n';
-                else if(pronoun=='sinä') return weakStem + 't';
-                else if(pronoun=='me') return weakStem + 'mme';
-                else if(pronoun=='te') return weakStem + 'tte';
-                else if(pronoun=='he') return strongStem + 'v'+aToUse+'t';
-                else return strongStem + aToUse;
+                switch(pronoun) {
+                    case 'minä': return weakStem + 'n';
+                    case 'sinä': return weakStem + 't';
+                    case 'me': return weakStem + 'mme';
+                    case 'te': return weakStem + 'tte';
+                    case 'he': return strongStem + 'v'+aToUse+'t';
+                    default: return strongStem + letterToAppendToThirdPerson; 
+                }
             }
-            if(infinitive=='elää') {
-                return conjugateStem('elä', 'elä', pronoun);
-            } else {
-                return conjugateStem('souta', 'souda', pronoun);
-            }
+            var desiredVerbConfiguration = collectionOfVerbConfigurations.filter(function(row) { return row[0]==infinitive; }).first();
+            return conjugateStem(desiredVerbConfiguration[1], desiredVerbConfiguration[2], pronoun);
         }
     }
 }
