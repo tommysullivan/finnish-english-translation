@@ -3,7 +3,7 @@ module.exports = function(collectionOfVerbConfigurations) {
         conjugate: function(infinitive, pronoun) {
             pronoun = pronoun.toLowerCase();
             function conjugateStem(strongStem, weakStem, pronoun) {
-                var endsInDa = infinitive.substring(infinitive.length-2) == 'da'
+                var endsInDa = infinitive.substring(infinitive.length-2) == 'da'; 
                 var letterToAppendToThirdPerson = endsInDa ? '' : strongStem.charAt(strongStem.length-1);
                 var aToUse = strongStem.indexOf('ä')!=-1 ? 'ä' : 'a';
                 switch(pronoun) {
