@@ -8,7 +8,13 @@ var RuleLoader = require('./ruleLoader');
 var RuleThatAppendsString = require('./ruleThatAppendsString');
 var RuleDecorator = require('./ruleDecorator');
 var PresentTenseConjugator = require('./presentTenseConjugator');
+var Strings = require('./strings');
+var Predicates = require('./predicates');
 var fs = require('fs');
+
+var vowelsCollection = Collection(['a','e','i','o','u','y','ä','ö']);
+var predicates = Predicates();
+var string = Strings(vowelsCollection, predicates);
 
 module.exports = function() {
     function createRuleLoader() {
@@ -28,7 +34,7 @@ module.exports = function() {
             var stemRulesFileContent = fs.readFileSync('./configuration/stem-rules.json');
             var arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
             var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
-            return PresentTenseConjugator(collectionOfVerbConfigurations);
+            return PresentTenseConjugator(collectionOfVerbConfigurations, string);
         }
     }
 }

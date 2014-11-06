@@ -1,11 +1,11 @@
-module.exports = function(collectionOfVerbConfigurations) {
+module.exports = function(collectionOfVerbConfigurations, string) {
     return {
         conjugate: function(infinitive, pronoun) {
             pronoun = pronoun.toLowerCase();
             function conjugateStem(strongStem, weakStem, pronoun) {
-                var endsInDa = infinitive.substring(infinitive.length-2) == 'da'; 
-                var letterToAppendToThirdPerson = endsInDa ? '' : strongStem.charAt(strongStem.length-1);
-                var aToUse = strongStem.indexOf('ä')!=-1 ? 'ä' : 'a';
+                var endsInDa = string.endsWith(infinitive, 'da') || string.endsWith(infinitive, 'dä'); 
+                var letterToAppendToThirdPerson = endsInDa && string.isVowel(string.charFromEnd(infinitive, 3)) ? '' : string.last(strongStem);
+                var aToUse = string.contains(strongStem, 'ä') || string.contains(strongStem, 'ö') ? 'ä' : 'a';
                 switch(pronoun) {
                     case 'minä': return weakStem + 'n';
                     case 'sinä': return weakStem + 't';
