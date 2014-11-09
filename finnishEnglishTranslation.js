@@ -10,6 +10,7 @@ var RuleDecorator = require('./ruleDecorator');
 var PresentTenseConjugator = require('./presentTenseConjugator');
 var Strings = require('./strings');
 var Predicates = require('./predicates');
+var InfinitiveHelper = require('./infinitiveHelper');
 var fs = require('fs');
 
 var vowelsCollection = Collection(['a','e','i','o','u','y','ä','ö']);
@@ -34,7 +35,8 @@ module.exports = function() {
             var stemRulesFileContent = fs.readFileSync('./configuration/stem-rules.json');
             var arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
             var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
-            return PresentTenseConjugator(collectionOfVerbConfigurations, string);
+            var infinitiveHelper = InfinitiveHelper(collectionOfVerbConfigurations);
+            return PresentTenseConjugator(infinitiveHelper, string);
         }
     }
 }
