@@ -1,7 +1,5 @@
 var FinnishEnglishTranslation = require('../../finnishEnglishTranslation');
 var finnishEnglishTranslator = FinnishEnglishTranslation();
-var presentTenseConjugator = finnishEnglishTranslator.createPresentTenseConjugator();
-var perfectTenseConjugator = finnishEnglishTranslator.createPerfectTenseConjugator();
 
 function expectConjugation(infinitive, pronoun, expected, methodToCall) {
     describe('and pronoun is '+pronoun, function() {
@@ -12,14 +10,14 @@ function expectConjugation(infinitive, pronoun, expected, methodToCall) {
 }
 function expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, shouldTestNegation) {
     describe('when infinitive is '+infinitive, function() {
-        function expectConjugationForPronoun(pronoun, index) {
+        ['minä', 'sinä', 'han / se', 'me', 'te', 'he'].forEach(function(pronoun, index) {
             expectConjugation(infinitive, pronoun, arrayOfExpectedConjugations[index], shouldTestNegation);
-        }
-        ['minä', 'sinä', 'han / se', 'me', 'te', 'he'].forEach(expectConjugationForPronoun);
+        });
     });
 }
 
 describe('PresentTenseConjugator', function() {
+    var presentTenseConjugator = finnishEnglishTranslator.createPresentTenseConjugator();
     describe('conjugate(infinitive, person)', function() {
         //TODO: Maybe we should test different capitalizations!
         function expectPositiveConjugations(infinitive, arrayOfExpectedConjugations) {
@@ -50,6 +48,7 @@ describe('PresentTenseConjugator', function() {
 });
 
 describe('PerfectTenseConjugator', function() {
+    var perfectTenseConjugator = finnishEnglishTranslator.createPerfectTenseConjugator();
     describe('conjugate(infinitive, person)', function() {
         //TODO: Maybe we should test different capitalizations!
         function expectPositiveConjugations(infinitive, arrayOfExpectedConjugations) {
