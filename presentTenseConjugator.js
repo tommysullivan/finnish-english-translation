@@ -5,7 +5,11 @@ module.exports = function(infinitiveHelper, string) {
             var strongStem = infinitiveHelper.getStrongStem(infinitive);
             var weakStem = infinitiveHelper.getWeakStem(infinitive)
             var endsInDa = string.endsWith(infinitive, 'da') || string.endsWith(infinitive, 'dä'); 
-            var letterToAppendToThirdPerson = endsInDa && string.isVowel(string.charFromEnd(infinitive, 3)) ? '' : string.last(strongStem);
+            var letterToAppendToThirdPerson = endsInDa && string.isVowel(string.charFromEnd(infinitive, 3))
+                ? '' 
+                : infinitive == 'olla'
+                    ? 'n' 
+                    : string.last(strongStem);
             var aToUse = string.contains(strongStem, 'ä') || string.contains(strongStem, 'ö') ? 'ä' : 'a';
             switch(pronoun) {
                 case 'minä': return weakStem + 'n';
