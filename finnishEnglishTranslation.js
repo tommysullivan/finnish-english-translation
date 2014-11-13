@@ -42,7 +42,7 @@ module.exports = function() {
             return PresentTenseConjugator(createInfinitiveHelper(), string);
         },
         createPerfectTenseConjugator: function() {
-            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createInfinitiveHelper());
+            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createInfinitiveHelper(), string);
         }
     }
 }

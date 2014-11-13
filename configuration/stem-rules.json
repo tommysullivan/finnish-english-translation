@@ -1,10 +1,10 @@
 [
     ["elää", "elä", "elä"],
     ["soutaa", "souta", "souda"],
-    ["takellella", "takeltele", "takeltele"],
+    ["takellella", "takeltele", "takeltele", "takelle"],
     ["kokea", "koke", "koe"],
     ["voida", "voi", "voi"],
-    ["nähdä", "näke", "näe"],
+    ["nähdä", "näke", "näe", "näh"],
     ["syödä","syö","syö"],
     ["olla", "o", "ole"]
 ]

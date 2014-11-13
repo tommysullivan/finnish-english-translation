@@ -1,13 +1,17 @@
 module.exports = function(collectionOfVerbConfigurations) {
+    function getDesiredVerbConfiguration(infinitive) {
+        return collectionOfVerbConfigurations.filter(function(row) { return row[0]==infinitive; }).first();
+    }
     return {
-        getDesiredVerbConfiguration: function (infinitive) {
-            return collectionOfVerbConfigurations.filter(function(row) { return row[0]==infinitive; }).first();
-        },
         getStrongStem: function(infinitive) {
-            return this.getDesiredVerbConfiguration(infinitive)[1];
+            return getDesiredVerbConfiguration(infinitive)[1];
         },
         getWeakStem: function(infinitive) {
-            return this.getDesiredVerbConfiguration(infinitive)[2];
+            return getDesiredVerbConfiguration(infinitive)[2];
+        },
+        getStemForPerfectConjugation: function(infinitive) {
+            var doubleStem = getDesiredVerbConfiguration(infinitive)[3];
+            return doubleStem!=undefined ? doubleStem : this.getStrongStem(infinitive);
         }
     }
 }
