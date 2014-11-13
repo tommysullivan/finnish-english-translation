@@ -11,6 +11,7 @@ var PresentTenseConjugator = require('./presentTenseConjugator');
 var Strings = require('./strings');
 var Predicates = require('./predicates');
 var InfinitiveHelper = require('./infinitiveHelper');
+var PerfectTenseConjugator = require('./perfectTenseConjugator');
 var fs = require('fs');
 
 var vowelsCollection = Collection(['a','e','i','o','u','y','ä','ö']);
@@ -20,6 +21,12 @@ var string = Strings(vowelsCollection, predicates);
 module.exports = function() {
     function createRuleLoader() {
         return RuleLoader(Collection, SimpleTransformRule, fs);
+    }
+    function createInfinitiveHelper() {
+        var stemRulesFileContent = fs.readFileSync('./configuration/stem-rules.json');
+        var arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
+        var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
+        return InfinitiveHelper(collectionOfVerbConfigurations);
     }
     return {
         createPluralizer: function() {
@@ -32,11 +39,10 @@ module.exports = function() {
             return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules, ruleThatAppendsT));
         },
         createPresentTenseConjugator: function() {
-            var stemRulesFileContent = fs.readFileSync('./configuration/stem-rules.json');
-            var arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
-            var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
-            var infinitiveHelper = InfinitiveHelper(collectionOfVerbConfigurations);
-            return PresentTenseConjugator(infinitiveHelper, string);
+            return PresentTenseConjugator(createInfinitiveHelper(), string);
+        },
+        createPerfectTenseConjugator: function() {
+            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createInfinitiveHelper());
         }
     }
 }
