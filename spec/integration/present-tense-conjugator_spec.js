@@ -55,11 +55,11 @@ describe('PerfectTenseConjugator', function() {
             expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, perfectTenseConjugator.conjugate);    
         }
         expectPositiveConjugations('elää', ['olen elänyt', 'olet elänyt', 'on elänyt', 'olemme eläneet', 'olette eläneet', 'ovat eläneet']);
-        expectPositiveConjugations('soutaa', ['olen soudanut', 'olet soudanut', 'on soudanut', 'olemme soudaneet', 'olette soudaneet', 'ovat soudaneet']);
-        expectPositiveConjugations('takellella', ['olen takeltellut', 'olet takeltellut', 'on takeltellut', 'olemme takeltelleet', 'olette takeltelleet', 'ovat takeltelleet']);
-        expectPositiveConjugations('kokea', ['olen koenut', 'olet koenut', 'on koenut', 'olemme koeneet', 'olette koeneet', 'ovat koeneet']);
+        expectPositiveConjugations('soutaa', ['olen soutanut', 'olet soutanut', 'on soutanut', 'olemme soutaneet', 'olette soutaneet', 'ovat soutaneet']);
+        expectPositiveConjugations('takellella', ['olen takellellut', 'olet takellellut', 'on takellellut', 'olemme takellelleet', 'olette takellelleet', 'ovat takeltelleet']);
+        expectPositiveConjugations('kokea', ['olen kokenut', 'olet kokenut', 'on kokenut', 'olemme kokeneet', 'olette kokeneet', 'ovat kokeneet']);
         expectPositiveConjugations('voida', ['olen voinut', 'olet voinut', 'on voinut', 'olemme voineet', 'olette voineet', 'ovat voineet']);
-        expectPositiveConjugations('nähdä', ['olen näenyt', 'olet näenyt', 'on näenyt', 'olemme näeneet', 'olette näeneet', 'ovat näeneet']);
+        expectPositiveConjugations('nähdä', ['olen nähnyt', 'olet nähnyt', 'on nähnyt', 'olemme nähneet', 'olette nähneet', 'ovat nähneet']);
         expectPositiveConjugations('syödä', ['olen syönyt', 'olet syönyt', 'on syönyt', 'olemme syöneet', 'olette syöneet', 'ovat syöneet']);
         expectPositiveConjugations('olla', ['olen ollut', 'olet ollut', 'on ollut', 'olemme olleet', 'olette olleet', 'ovat olleet']);
     });
@@ -68,11 +68,11 @@ describe('PerfectTenseConjugator', function() {
             expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, perfectTenseConjugator.conjugateNegation);    
         }
         expectNegativeConjugations('elää', ['en ollut elänyt', 'et ollut elänyt', 'ei ollut elänyt', 'emme olleet eläneet', 'ette olleet eläneet', 'eivät olleet eläneet']);
-        expectNegativeConjugations('soutaa', ['en ollut soudanut', 'et ollut soudanut', 'ei ollut soudanut', 'emme olleet soudaneet', 'ette olleet soudaneet', 'eivät olleet soudaneet']);
-        expectNegativeConjugations('takellella', ['en ollut takeltellut', 'et ollut takeltellut', 'ei ollut takeltellut', 'emme olleet takeltelleet', 'olette takeltelleet', 'eivät olleet takeltelleet']);
-        expectNegativeConjugations('kokea', ['en ollut koenut', 'et ollut koenut', 'ei ollut koenut', 'emme olleet koeneet', 'ette olleet koeneet', 'eivät olleet koeneet']);
+        expectNegativeConjugations('soutaa', ['en ollut soutanut', 'et ollut soutanut', 'ei ollut soutanut', 'emme olleet soutaneet', 'ette olleet soutaneet', 'eivät olleet soutaneet']);
+        expectNegativeConjugations('takellella', ['en ollut takellellut', 'et ollut takellellut', 'ei ollut takellellut', 'emme olleet takellelleet', 'olette takellelleet', 'eivät olleet takellelleet']);
+        expectNegativeConjugations('kokea', ['en ollut kokenut', 'et ollut kokenut', 'ei ollut kokenut', 'emme olleet kokeneet', 'ette olleet kokeneet', 'eivät olleet kokeneet']);
         expectNegativeConjugations('voida', ['en ollut voinut', 'et ollut voinut', 'ei ollut voinut', 'emme olleet voineet', 'ette olleet voineet', 'eivät olleet voineet']);
-        expectNegativeConjugations('nähdä', ['en ollut näenyt', 'et ollut näenyt', 'ei ollut näenyt', 'emme olleet näeneet', 'ette olleet näeneet', 'eivät olleet näeneet']);
+        expectNegativeConjugations('nähdä', ['en ollut nähnyt', 'et ollut nähnyt', 'ei ollut nähnyt', 'emme olleet nähneet', 'ette olleet nähneet', 'eivät olleet nähneet']);
         expectNegativeConjugations('syödä', ['en ollut syönyt', 'et ollut syönyt', 'ei ollut syönyt', 'emme olleet syöneet', 'ette olleet syöneet', 'eivät olleet syöneet']);
         expectNegativeConjugations('olla', ['en ollut ollut', 'et ollut ollut', 'ei ollut ollut', 'emme olleet olleet', 'ette olleet olleet', 'eivät olleet olleet']);
     });
