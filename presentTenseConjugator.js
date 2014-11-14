@@ -1,4 +1,4 @@
-module.exports = function(infinitiveHelper, string) {
+module.exports = function(infinitiveHelper, string, noWordConjugator) {
     return {
         conjugate: function(infinitive, pronoun) {
             pronoun = pronoun.toLowerCase();
@@ -23,14 +23,7 @@ module.exports = function(infinitiveHelper, string) {
         conjugateNegation: function(infinitive, pronoun) {
             pronoun = pronoun.toLowerCase();
             var stemInNegation = infinitiveHelper.getWeakStem(infinitive);
-            switch(pronoun){
-                case 'minä': return 'en '+stemInNegation;
-                case 'sinä': return 'et '+stemInNegation;
-                case 'me': return 'emme '+stemInNegation;
-                case 'te': return 'ette '+stemInNegation;
-                case 'he': return 'eivät '+stemInNegation;
-                default: return 'ei '+stemInNegation;
-            }
+            return noWordConjugator.conjugateNoWord(pronoun)+' '+stemInNegation;
             
         }
     }

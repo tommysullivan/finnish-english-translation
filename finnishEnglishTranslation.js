@@ -12,6 +12,7 @@ var Strings = require('./strings');
 var Predicates = require('./predicates');
 var InfinitiveHelper = require('./infinitiveHelper');
 var PerfectTenseConjugator = require('./perfectTenseConjugator');
+var NoWordConjugator = require('./noWordConjugator');
 var fs = require('fs');
 
 var vowelsCollection = Collection(['a','e','i','o','u','y','ä','ö']);
@@ -39,10 +40,10 @@ module.exports = function() {
             return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules, ruleThatAppendsT));
         },
         createPresentTenseConjugator: function() {
-            return PresentTenseConjugator(createInfinitiveHelper(), string);
+            return PresentTenseConjugator(createInfinitiveHelper(), string, NoWordConjugator());
         },
         createPerfectTenseConjugator: function() {
-            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createInfinitiveHelper(), string);
+            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createInfinitiveHelper(), string, NoWordConjugator());
         }
     }
 }

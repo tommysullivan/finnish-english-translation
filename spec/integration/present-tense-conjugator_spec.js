@@ -63,17 +63,17 @@ describe('PerfectTenseConjugator', function() {
         expectPositiveConjugations('syödä', ['olen syönyt', 'olet syönyt', 'on syönyt', 'olemme syöneet', 'olette syöneet', 'ovat syöneet']);
         expectPositiveConjugations('olla', ['olen ollut', 'olet ollut', 'on ollut', 'olemme olleet', 'olette olleet', 'ovat olleet']);
     });
-    // describe('conjugateNegation(infinitive, person)', function() {
-    //     function expectNegativeConjugations(infinitive, arrayOfExpectedConjugations) {
-    //         expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, perfectTenseConjugator.conjugateNegation);    
-    //     }
-    //     expectNegativeConjugations('elää', ['en ole elänyt', 'et ole elänyt', 'ei ole elänyt', 'emme ole eläneet', 'ette ole eläneet', 'eivät ole eläneet']);
-    //     expectNegativeConjugations('soutaa', ['en ole soutanut', 'et ole soutanut', 'ei ole soutanut', 'emme ole soutaneet', 'ette ole soutaneet', 'eivät ole soutaneet']);
-    //     expectNegativeConjugations('takellella', ['en ole takellellut', 'et ole takellellut', 'ei ole takellellut', 'emme ole takellelleet', 'olette takellelleet', 'eivät ole takellelleet']);
-    //     expectNegativeConjugations('kokea', ['en ole kokenut', 'et ole kokenut', 'ei ole kokenut', 'emme ole kokeneet', 'ette ole kokeneet', 'eivät ole kokeneet']);
-    //     expectNegativeConjugations('voida', ['en ole voinut', 'et ole voinut', 'ei ole voinut', 'emme ole voineet', 'ette ole voineet', 'eivät ole voineet']);
-    //     expectNegativeConjugations('nähdä', ['en ole nähnyt', 'et ole nähnyt', 'ei ole nähnyt', 'emme ole nähneet', 'ette ole nähneet', 'eivät ole nähneet']);
-    //     expectNegativeConjugations('syödä', ['en ole syönyt', 'et ole syönyt', 'ei ole syönyt', 'emme ole syöneet', 'ette ole syöneet', 'eivät ole syöneet']);
-    //     expectNegativeConjugations('olla', ['en ole ollut', 'et ole ollut', 'ei ole ollut', 'emme ole olleet', 'ette ole olleet', 'eivät ole olleet']);
-    // });
+     describe('conjugateNegation(infinitive, person)', function() {
+         function expectNegativeConjugations(infinitive, arrayOfExpectedConjugations) {
+             expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, perfectTenseConjugator.conjugateNegation);    
+         }
+         expectNegativeConjugations('elää', ['en ole elänyt', 'et ole elänyt', 'ei ole elänyt', 'emme ole eläneet', 'ette ole eläneet', 'eivät ole eläneet']);
+         expectNegativeConjugations('soutaa', ['en ole soutanut', 'et ole soutanut', 'ei ole soutanut', 'emme ole soutaneet', 'ette ole soutaneet', 'eivät ole soutaneet']);
+         expectNegativeConjugations('takellella', ['en ole takellellut', 'et ole takellellut', 'ei ole takellellut', 'emme ole takellelleet', 'ette ole takellelleet', 'eivät ole takellelleet']);
+         expectNegativeConjugations('kokea', ['en ole kokenut', 'et ole kokenut', 'ei ole kokenut', 'emme ole kokeneet', 'ette ole kokeneet', 'eivät ole kokeneet']);
+         expectNegativeConjugations('voida', ['en ole voinut', 'et ole voinut', 'ei ole voinut', 'emme ole voineet', 'ette ole voineet', 'eivät ole voineet']);
+         expectNegativeConjugations('nähdä', ['en ole nähnyt', 'et ole nähnyt', 'ei ole nähnyt', 'emme ole nähneet', 'ette ole nähneet', 'eivät ole nähneet']);
+         expectNegativeConjugations('syödä', ['en ole syönyt', 'et ole syönyt', 'ei ole syönyt', 'emme ole syöneet', 'ette ole syöneet', 'eivät ole syöneet']);
+         expectNegativeConjugations('olla', ['en ole ollut', 'et ole ollut', 'ei ole ollut', 'emme ole olleet', 'ette ole olleet', 'eivät ole olleet']);
+     });
 });
