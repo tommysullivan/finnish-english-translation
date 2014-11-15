@@ -13,6 +13,9 @@ var Predicates = require('./predicates');
 var InfinitiveHelper = require('./infinitiveHelper');
 var PerfectTenseConjugator = require('./perfectTenseConjugator');
 var NoWordConjugator = require('./noWordConjugator');
+var ImperfectTenseConjugator = require('./imperfectTenseConjugator');
+var ParticipleHelper = require('./participleHelper');
+var PluperfectTenseConjugator = require('./pluperfectTenseConjugator');
 var fs = require('fs');
 
 var vowelsCollection = Collection(['a','e','i','o','u','y','ä','ö']);
@@ -29,6 +32,9 @@ module.exports = function() {
         var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
         return InfinitiveHelper(collectionOfVerbConfigurations);
     }
+    function createParticipleHelper() {
+        return ParticipleHelper(createInfinitiveHelper(), string);
+    }
     return {
         createPluralizer: function() {
             var collectionOfSimpleTransformRules = createRuleLoader().loadRules('./configuration/plural-rules.json');
@@ -43,7 +49,13 @@ module.exports = function() {
             return PresentTenseConjugator(createInfinitiveHelper(), string, NoWordConjugator());
         },
         createPerfectTenseConjugator: function() {
-            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createInfinitiveHelper(), string, NoWordConjugator());
+            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), NoWordConjugator());
+        },
+        createImperfectTenseConjugator: function() {
+            return ImperfectTenseConjugator(NoWordConjugator(), createParticipleHelper());
+        },
+        createPluperfectTenseConjugator: function() {
+            return PluperfectTenseConjugator(this.createImperfectTenseConjugator(), createParticipleHelper(), NoWordConjugator());
         }
     }
 }
