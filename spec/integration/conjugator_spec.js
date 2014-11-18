@@ -1,18 +1,19 @@
 var FinnishEnglishTranslation = require('../../finnishEnglishTranslation');
 var finnishEnglishTranslator = FinnishEnglishTranslation();
 
-function expectConjugation(infinitiveString, pronoun, expected, methodToCall) {
-    describe('and pronoun is '+pronoun, function() {
+function expectConjugation(infinitiveString, pronounString, expected, methodToCall) {
+    describe('and pronoun is '+pronounString, function() {
         it('should be '+expected, function() {
             var infinitive = finnishEnglishTranslator.createInfinitive(infinitiveString);
+            var pronoun = finnishEnglishTranslator.createPronoun(pronounString);
             expect(methodToCall(infinitive, pronoun)).toBe(expected);
         }); 
     }); 
 }
-function expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, shouldTestNegation) {
-    describe('when infinitive is '+infinitive, function() {
-        ['minä', 'sinä', 'han / se', 'me', 'te', 'he'].forEach(function(pronoun, index) {
-            expectConjugation(infinitive, pronoun, arrayOfExpectedConjugations[index], shouldTestNegation);
+function expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, shouldTestNegation) {
+    describe('when infinitive is '+infinitiveString, function() {
+        ['minä', 'sinä', 'han / se', 'me', 'te', 'he'].forEach(function(pronounString, index) {
+            expectConjugation(infinitiveString, pronounString, arrayOfExpectedConjugations[index], shouldTestNegation);
         });
     });
 }
@@ -21,8 +22,8 @@ describe('PresentTenseConjugator', function() {
     var presentTenseConjugator = finnishEnglishTranslator.createPresentTenseConjugator();
     describe('conjugate(infinitive, person)', function() {
         //TODO: Maybe we should test different capitalizations!
-        function expectPositiveConjugations(infinitive, arrayOfExpectedConjugations) {
-            expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, presentTenseConjugator.conjugate);    
+        function expectPositiveConjugations(infinitiveString, arrayOfExpectedConjugations) {
+            expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, presentTenseConjugator.conjugate);    
         }
         expectPositiveConjugations('elää', ['elän', 'elät', 'elää', 'elämme', 'elätte', 'elävät']);
         expectPositiveConjugations('soutaa', ['soudan', 'soudat', 'soutaa', 'soudamme', 'soudatte', 'soutavat']);
@@ -34,8 +35,8 @@ describe('PresentTenseConjugator', function() {
         expectPositiveConjugations('olla', ['olen', 'olet', 'on', 'olemme', 'olette', 'ovat']);
     });
     describe('conjugateNegation(infinitive, person)', function() {
-        function expectNegativeConjugations(infinitive, arrayOfExpectedConjugations) {
-            expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, presentTenseConjugator.conjugateNegation);    
+        function expectNegativeConjugations(infinitiveString, arrayOfExpectedConjugations) {
+            expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, presentTenseConjugator.conjugateNegation);    
         }
         expectNegativeConjugations('elää', ['en elä', 'et elä', 'ei elä', 'emme elä', 'ette elä', 'eivät elä']);
         expectNegativeConjugations('soutaa', ['en souda', 'et souda', 'ei souda', 'emme souda', 'ette souda', 'eivät souda']);
@@ -52,8 +53,8 @@ describe('PerfectTenseConjugator', function() {
     var perfectTenseConjugator = finnishEnglishTranslator.createPerfectTenseConjugator();
     describe('conjugate(infinitive, person)', function() {
         //TODO: Maybe we should test different capitalizations!
-        function expectPositiveConjugations(infinitive, arrayOfExpectedConjugations) {
-            expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, perfectTenseConjugator.conjugate);    
+        function expectPositiveConjugations(infinitiveString, arrayOfExpectedConjugations) {
+            expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, perfectTenseConjugator.conjugate);    
         }
         expectPositiveConjugations('elää', ['olen elänyt', 'olet elänyt', 'on elänyt', 'olemme eläneet', 'olette eläneet', 'ovat eläneet']);
         expectPositiveConjugations('soutaa', ['olen soutanut', 'olet soutanut', 'on soutanut', 'olemme soutaneet', 'olette soutaneet', 'ovat soutaneet']);
@@ -65,8 +66,8 @@ describe('PerfectTenseConjugator', function() {
         expectPositiveConjugations('olla', ['olen ollut', 'olet ollut', 'on ollut', 'olemme olleet', 'olette olleet', 'ovat olleet']);
     });
      describe('conjugateNegation(infinitive, person)', function() {
-         function expectNegativeConjugations(infinitive, arrayOfExpectedConjugations) {
-             expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, perfectTenseConjugator.conjugateNegation);    
+         function expectNegativeConjugations(infinitiveString, arrayOfExpectedConjugations) {
+             expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, perfectTenseConjugator.conjugateNegation);    
          }
          expectNegativeConjugations('elää', ['en ole elänyt', 'et ole elänyt', 'ei ole elänyt', 'emme ole eläneet', 'ette ole eläneet', 'eivät ole eläneet']);
          expectNegativeConjugations('soutaa', ['en ole soutanut', 'et ole soutanut', 'ei ole soutanut', 'emme ole soutaneet', 'ette ole soutaneet', 'eivät ole soutaneet']);
@@ -83,8 +84,8 @@ describe('ImperfectTenseConjugator', function() {
     var imperfectTenseConjugator = finnishEnglishTranslator.createImperfectTenseConjugator();
     describe('conjugate(infinitive, person)', function() {
         //TODO: Maybe we should test different capitalizations!
-        function expectPositiveConjugations(infinitive, arrayOfExpectedConjugations) {
-            expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, imperfectTenseConjugator.conjugate);    
+        function expectPositiveConjugations(infinitiveString, arrayOfExpectedConjugations) {
+            expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, imperfectTenseConjugator.conjugate);    
         }
         // expectPositiveConjugations('elää', ['elin', 'elit', 'eli', 'elimme', 'elitte', 'elivät']);
         // expectPositiveConjugations('soutaa', ['soudin', 'soudit', 'souti', 'soudimme', 'souditte', 'soutivat']);
@@ -96,8 +97,8 @@ describe('ImperfectTenseConjugator', function() {
         expectPositiveConjugations('olla', ['olin', 'olit', 'oli', 'olimme', 'olitte', 'olivat']);
     });
      describe('conjugateNegation(infinitive, person)', function() {
-         function expectNegativeConjugations(infinitive, arrayOfExpectedConjugations) {
-             expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, imperfectTenseConjugator.conjugateNegation);    
+         function expectNegativeConjugations(infinitiveString, arrayOfExpectedConjugations) {
+             expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, imperfectTenseConjugator.conjugateNegation);    
          }
          expectNegativeConjugations('elää', ['en elänyt', 'et elänyt', 'ei elänyt', 'emme eläneet', 'ette eläneet', 'eivät eläneet']);
          expectNegativeConjugations('soutaa', ['en soutanut', 'et soutanut', 'ei soutanut', 'emme soutaneet', 'ette soutaneet', 'eivät soutaneet']);
@@ -114,8 +115,8 @@ describe('PluperfectTenseConjugator', function() {
     var pluperfectTenseConjugator = finnishEnglishTranslator.createPluperfectTenseConjugator();
     describe('conjugate(infinitive, person)', function() {
         //TODO: Maybe we should test different capitalizations!
-        function expectPositiveConjugations(infinitive, arrayOfExpectedConjugations) {
-            expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, pluperfectTenseConjugator.conjugate);    
+        function expectPositiveConjugations(infinitiveString, arrayOfExpectedConjugations) {
+            expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, pluperfectTenseConjugator.conjugate);    
         }
         expectPositiveConjugations('elää', ['olin elänyt', 'olit elänyt', 'oli elänyt', 'olimme eläneet', 'olitte eläneet', 'olivat eläneet']);
         expectPositiveConjugations('soutaa', ['olin soutanut', 'olit soutanut', 'oli soutanut', 'olimme soutaneet', 'olitte soutaneet', 'olivat soutaneet']);
@@ -127,8 +128,8 @@ describe('PluperfectTenseConjugator', function() {
         expectPositiveConjugations('olla', ['olin ollut', 'olit ollut', 'oli ollut', 'olimme olleet', 'olitte olleet', 'olivat olleet']);
     });
      describe('conjugateNegation(infinitive, person)', function() {
-         function expectNegativeConjugations(infinitive, arrayOfExpectedConjugations) {
-             expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, pluperfectTenseConjugator.conjugateNegation);    
+         function expectNegativeConjugations(infinitiveString, arrayOfExpectedConjugations) {
+             expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, pluperfectTenseConjugator.conjugateNegation);    
          }
          expectNegativeConjugations('elää', ['en ollut elänyt', 'et ollut elänyt', 'ei ollut elänyt', 'emme olleet eläneet', 'ette olleet eläneet', 'eivät olleet eläneet']);
          expectNegativeConjugations('soutaa', ['en ollut soutanut', 'et ollut soutanut', 'ei ollut soutanut', 'emme olleet soutaneet', 'ette olleet soutaneet', 'eivät olleet soutaneet']);

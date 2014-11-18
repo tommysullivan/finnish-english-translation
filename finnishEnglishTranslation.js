@@ -12,19 +12,23 @@ var PresentTenseConjugator = require('./presentTenseConjugator');
 var Predicates = require('./predicates');
 var Infinitive = require('./infinitive');
 var PerfectTenseConjugator = require('./perfectTenseConjugator');
-var NoWordConjugator = require('./noWordConjugator');
 var ImperfectTenseConjugator = require('./imperfectTenseConjugator');
 var ParticipleHelper = require('./participleHelper');
 var PluperfectTenseConjugator = require('./pluperfectTenseConjugator');
 var Word = require('./word');
 var Character = require('./character');
+var Pronoun = require('./pronoun');
 
-var vowelCollection = Collection(['a','e','i','o','u','y','ä','ö']);
-var toBeInfinitiveString = 'olla';
-var space = ' ';
-var emptyString = '';
 var pluralRulesPath = './configuration/plural-rules.json';
 var stemRulesPath = './configuration/stem-rules.json';
+
+var firstPersonPronounCollection = Collection(['minä','me']);
+var secondPersonPronounCollection = Collection(['sinä','te']);
+var pluralPronounCollection = Collection(['me','te','he']);
+var toBeInfinitiveString = 'olla';
+var vowelCollection = Collection(['a','e','i','o','u','y','ä','ö']);
+var space = ' ';
+var emptyString = '';
 var pluralEndingLetter = 't';
 
 module.exports = function() {
@@ -45,16 +49,16 @@ module.exports = function() {
             return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules, ruleThatAppendsT));
         },
         createPresentTenseConjugator: function() {
-            return PresentTenseConjugator(NoWordConjugator(), this.createToBeInfinitive(), space, emptyString);
+            return PresentTenseConjugator(this.createToBeInfinitive(), space, emptyString);
         },
         createPerfectTenseConjugator: function() {
-            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), NoWordConjugator(), this.createToBeInfinitive(), space);
+            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive(), space);
         },
         createImperfectTenseConjugator: function() {
-            return ImperfectTenseConjugator(NoWordConjugator(), createParticipleHelper());
+            return ImperfectTenseConjugator(createParticipleHelper(), space);
         },
         createPluperfectTenseConjugator: function() {
-            return PluperfectTenseConjugator(this.createImperfectTenseConjugator(), createParticipleHelper(), NoWordConjugator(), this.createToBeInfinitive(), space);
+            return PluperfectTenseConjugator(this.createImperfectTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive(), space);
         },
         createToBeInfinitive: function() {
             return this.createInfinitive(toBeInfinitiveString);  
@@ -70,6 +74,9 @@ module.exports = function() {
         },
         createWord: function(wordString) {
             return Word(wordString, this, this);
+        },
+        createPronoun: function(pronounString) {
+            return Pronoun(pronounString, pluralPronounCollection, firstPersonPronounCollection, secondPersonPronounCollection);
         }
     }
 }

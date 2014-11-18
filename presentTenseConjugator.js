@@ -1,7 +1,6 @@
-module.exports = function(noWordConjugator, toBeInfinitive, space, emptyString) {
+module.exports = function(toBeInfinitive, space, emptyString) {
     return {
         conjugate: function(infinitive, pronoun) {
-            pronoun = pronoun.toLowerCase();
             var strongStem = infinitive.getStrongStem();
             var weakStem = infinitive.getWeakStem()
             var endsInDa = infinitive.endsWith('da') || infinitive.endsWith('dä'); 
@@ -11,19 +10,20 @@ module.exports = function(noWordConjugator, toBeInfinitive, space, emptyString) 
                     ? 'n' 
                     : strongStem.last();
             var aToUse = strongStem.contains('ä') || strongStem.contains('ö') ? 'ä' : 'a';
-            switch(pronoun) {
-                case 'minä': return weakStem + 'n';
-                case 'sinä': return weakStem + 't';
-                case 'me': return weakStem + 'mme';
-                case 'te': return weakStem + 'tte';
-                case 'he': return strongStem + 'v'+aToUse+'t';
-                default: return strongStem + letterToAppendToThirdPerson; 
+            if(pronoun.isSingular()) {
+                if(pronoun.isFirstPerson()) return weakStem + 'n';
+                if(pronoun.isSecondPerson()) return weakStem + 't';
+                return strongStem + letterToAppendToThirdPerson; 
+            }
+            else {
+                if(pronoun.isFirstPerson()) return weakStem + 'mme';
+                if(pronoun.isSecondPerson()) return weakStem + 'tte';
+                return strongStem + 'v'+aToUse+'t';
             }
         },
         conjugateNegation: function(infinitive, pronoun) {
-            pronoun = pronoun.toLowerCase();
             var stemInNegation = infinitive.getWeakStem();
-            return noWordConjugator.conjugateNoWord(pronoun)+space+stemInNegation;
+            return pronoun.getNoWord(pronoun)+space+stemInNegation;
             
         }
     }

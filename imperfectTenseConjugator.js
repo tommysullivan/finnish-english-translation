@@ -1,18 +1,20 @@
-module.exports = function(noWordConjugator, participleHelper) {
+module.exports = function(participleHelper, space) {
     return {
         conjugate: function(infinitive, pronoun) {
-            switch(pronoun) {
-                case 'minä': return 'olin';
-                case 'sinä': return 'olit';
-                case 'me': return 'olimme';
-                case 'te': return 'olitte';
-                case 'he': return 'olivat';
-                default: return 'oli'
+            if(pronoun.isSingular()) {
+                if(pronoun.isFirstPerson()) return 'olin';
+                if(pronoun.isSecondPerson()) return 'olit';
+                return 'oli';
+            }
+            else {
+                if(pronoun.isFirstPerson()) return 'olimme';
+                if(pronoun.isSecondPerson()) return 'olitte';
+                return 'olivat';
             }
         },
         conjugateNegation: function(infinitive, pronoun) {
             var participle = participleHelper.getSecondParticiple(infinitive, pronoun);
-            return noWordConjugator.conjugateNoWord(pronoun)+' '+participle;
+            return pronoun.getNoWord()+space+participle;
         }
     }
 }
