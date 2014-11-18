@@ -1,7 +1,7 @@
 module.exports = function(pronounString, pluralPronounCollection, firstPersonPronounCollection, secondPersonPronounCollection) {
     return {
         isPlural: function() {
-            return pluralPronounCollection.contains(pronounString);
+            return pluralPronounCollection.contains(pronounString.toLowerCase());
         },
         isSingular: function() {
             return !this.isPlural();
@@ -19,10 +19,10 @@ module.exports = function(pronounString, pluralPronounCollection, firstPersonPro
             }
         },
         isFirstPerson: function() {
-            return firstPersonPronounCollection.contains(pronounString);
+            return firstPersonPronounCollection.contains(pronounString.toLowerCase());
         },
         isSecondPerson: function() {
-            return secondPersonPronounCollection.contains(pronounString);
+            return secondPersonPronounCollection.contains(pronounString.toLowerCase());
         },
         isThirdPerson: function() {
             return !(this.isFirstPerson || this.isSecondPerson());
