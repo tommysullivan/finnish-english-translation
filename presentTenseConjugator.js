@@ -1,16 +1,16 @@
-module.exports = function(infinitiveHelper, string, noWordConjugator) {
+module.exports = function(noWordConjugator, toBeInfinitive, space, emptyString) {
     return {
         conjugate: function(infinitive, pronoun) {
             pronoun = pronoun.toLowerCase();
-            var strongStem = infinitiveHelper.getStrongStem(infinitive);
-            var weakStem = infinitiveHelper.getWeakStem(infinitive)
-            var endsInDa = string.endsWith(infinitive, 'da') || string.endsWith(infinitive, 'dä'); 
-            var letterToAppendToThirdPerson = endsInDa && string.isVowel(string.charFromEnd(infinitive, 3))
-                ? '' 
-                : infinitive == 'olla'
+            var strongStem = infinitive.getStrongStem();
+            var weakStem = infinitive.getWeakStem()
+            var endsInDa = infinitive.endsWith('da') || infinitive.endsWith('dä'); 
+            var letterToAppendToThirdPerson = endsInDa && infinitive.charFromEnd(3).isVowel()
+                ? emptyString 
+                : infinitive.equals(toBeInfinitive)
                     ? 'n' 
-                    : string.last(strongStem);
-            var aToUse = string.contains(strongStem, 'ä') || string.contains(strongStem, 'ö') ? 'ä' : 'a';
+                    : strongStem.last();
+            var aToUse = strongStem.contains('ä') || strongStem.contains('ö') ? 'ä' : 'a';
             switch(pronoun) {
                 case 'minä': return weakStem + 'n';
                 case 'sinä': return weakStem + 't';
@@ -22,8 +22,8 @@ module.exports = function(infinitiveHelper, string, noWordConjugator) {
         },
         conjugateNegation: function(infinitive, pronoun) {
             pronoun = pronoun.toLowerCase();
-            var stemInNegation = infinitiveHelper.getWeakStem(infinitive);
-            return noWordConjugator.conjugateNoWord(pronoun)+' '+stemInNegation;
+            var stemInNegation = infinitive.getWeakStem();
+            return noWordConjugator.conjugateNoWord(pronoun)+space+stemInNegation;
             
         }
     }

@@ -1,5 +1,6 @@
-var collections = require('collections');
-var Collection = collections.Collection;
+var fs = require('fs');
+
+var Collection = require('collections').Collection;
 var SimpleTransformRule = require('./simpleTransformRule');
 var Pluralizer = require('./pluralizer');
 var RuleApplier = require('./ruleApplier.js');
@@ -8,37 +9,35 @@ var RuleLoader = require('./ruleLoader');
 var RuleThatAppendsString = require('./ruleThatAppendsString');
 var RuleDecorator = require('./ruleDecorator');
 var PresentTenseConjugator = require('./presentTenseConjugator');
-var Strings = require('./strings');
 var Predicates = require('./predicates');
-var InfinitiveHelper = require('./infinitiveHelper');
+var Infinitive = require('./infinitive');
 var PerfectTenseConjugator = require('./perfectTenseConjugator');
 var NoWordConjugator = require('./noWordConjugator');
 var ImperfectTenseConjugator = require('./imperfectTenseConjugator');
 var ParticipleHelper = require('./participleHelper');
 var PluperfectTenseConjugator = require('./pluperfectTenseConjugator');
-var fs = require('fs');
+var Word = require('./word');
+var Character = require('./character');
 
-var vowelsCollection = Collection(['a','e','i','o','u','y','ä','ö']);
-var predicates = Predicates();
-var string = Strings(vowelsCollection, predicates);
+var vowelCollection = Collection(['a','e','i','o','u','y','ä','ö']);
+var toBeInfinitiveString = 'olla';
+var space = ' ';
+var emptyString = '';
+var pluralRulesPath = './configuration/plural-rules.json';
+var stemRulesPath = './configuration/stem-rules.json';
+var pluralEndingLetter = 't';
 
 module.exports = function() {
     function createRuleLoader() {
         return RuleLoader(Collection, SimpleTransformRule, fs);
     }
-    function createInfinitiveHelper() {
-        var stemRulesFileContent = fs.readFileSync('./configuration/stem-rules.json');
-        var arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
-        var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
-        return InfinitiveHelper(collectionOfVerbConfigurations);
-    }
     function createParticipleHelper() {
-        return ParticipleHelper(createInfinitiveHelper(), string);
+        return ParticipleHelper();
     }
     return {
         createPluralizer: function() {
-            var collectionOfSimpleTransformRules = createRuleLoader().loadRules('./configuration/plural-rules.json');
-            var ruleThatAppendsT = RuleThatAppendsString('t');
+            var collectionOfSimpleTransformRules = createRuleLoader().loadRules(pluralRulesPath);
+            var ruleThatAppendsT = RuleThatAppendsString(pluralEndingLetter);
             function addTAppendBehaviorToRule(rule) {
                 return RuleDecorator(rule, ruleThatAppendsT);
             }
@@ -46,16 +45,31 @@ module.exports = function() {
             return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules, ruleThatAppendsT));
         },
         createPresentTenseConjugator: function() {
-            return PresentTenseConjugator(createInfinitiveHelper(), string, NoWordConjugator());
+            return PresentTenseConjugator(NoWordConjugator(), this.createToBeInfinitive(), space, emptyString);
         },
         createPerfectTenseConjugator: function() {
-            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), NoWordConjugator());
+            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), NoWordConjugator(), this.createToBeInfinitive(), space);
         },
         createImperfectTenseConjugator: function() {
             return ImperfectTenseConjugator(NoWordConjugator(), createParticipleHelper());
         },
         createPluperfectTenseConjugator: function() {
-            return PluperfectTenseConjugator(this.createImperfectTenseConjugator(), createParticipleHelper(), NoWordConjugator());
+            return PluperfectTenseConjugator(this.createImperfectTenseConjugator(), createParticipleHelper(), NoWordConjugator(), this.createToBeInfinitive(), space);
+        },
+        createToBeInfinitive: function() {
+            return this.createInfinitive(toBeInfinitiveString);  
+        },
+        createInfinitive: function(infinitiveString) {
+            var stemRulesFileContent = fs.readFileSync(stemRulesPath);
+            var arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
+            var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
+            return Infinitive(this.createWord(infinitiveString), collectionOfVerbConfigurations, this);
+        },
+        createChar: function(char) {
+            return Character(char, vowelCollection, Predicates());
+        },
+        createWord: function(wordString) {
+            return Word(wordString, this, this);
         }
     }
 }

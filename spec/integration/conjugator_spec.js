@@ -1,9 +1,10 @@
 var FinnishEnglishTranslation = require('../../finnishEnglishTranslation');
 var finnishEnglishTranslator = FinnishEnglishTranslation();
 
-function expectConjugation(infinitive, pronoun, expected, methodToCall) {
+function expectConjugation(infinitiveString, pronoun, expected, methodToCall) {
     describe('and pronoun is '+pronoun, function() {
         it('should be '+expected, function() {
+            var infinitive = finnishEnglishTranslator.createInfinitive(infinitiveString);
             expect(methodToCall(infinitive, pronoun)).toBe(expected);
         }); 
     }); 
@@ -85,13 +86,13 @@ describe('ImperfectTenseConjugator', function() {
         function expectPositiveConjugations(infinitive, arrayOfExpectedConjugations) {
             expectInfinitiveConjugations(infinitive, arrayOfExpectedConjugations, imperfectTenseConjugator.conjugate);    
         }
-        // expectPositiveConjugations('elää', ['olen elänyt', 'olet elänyt', 'on elänyt', 'olemme eläneet', 'olette eläneet', 'ovat eläneet']);
-        // expectPositiveConjugations('soutaa', ['olen soutanut', 'olet soutanut', 'on soutanut', 'olemme soutaneet', 'olette soutaneet', 'ovat soutaneet']);
-        // expectPositiveConjugations('takellella', ['olen takellellut', 'olet takellellut', 'on takellellut', 'olemme takellelleet', 'olette takellelleet', 'ovat takellelleet']);
-        // expectPositiveConjugations('kokea', ['olen kokenut', 'olet kokenut', 'on kokenut', 'olemme kokeneet', 'olette kokeneet', 'ovat kokeneet']);
-        // expectPositiveConjugations('voida', ['olen voinut', 'olet voinut', 'on voinut', 'olemme voineet', 'olette voineet', 'ovat voineet']);
-        // expectPositiveConjugations('nähdä', ['olen nähnyt', 'olet nähnyt', 'on nähnyt', 'olemme nähneet', 'olette nähneet', 'ovat nähneet']);
-        // expectPositiveConjugations('syödä', ['olen syönyt', 'olet syönyt', 'on syönyt', 'olemme syöneet', 'olette syöneet', 'ovat syöneet']);
+        // expectPositiveConjugations('elää', ['elin', 'elit', 'eli', 'elimme', 'elitte', 'elivät']);
+        // expectPositiveConjugations('soutaa', ['soudin', 'soudit', 'souti', 'soudimme', 'souditte', 'soutivat']);
+        // expectPositiveConjugations('takellella', ['takeltelin', 'takeltelit', 'takelteli', 'takeltelimme', 'takeltelitte', 'takeltelivat']);
+        // expectPositiveConjugations('kokea', ['koin', 'koit', 'koki', 'koimme', 'koitte', 'kokivat']);
+        // expectPositiveConjugations('voida', ['voin', 'voit', 'voi', 'voimme', 'voitte', 'voivat']);
+        // expectPositiveConjugations('nähdä', ['näin', 'näit', 'näki', 'näimme', 'näitte', 'näkivät']);
+        // expectPositiveConjugations('syödä', ['söin', 'söit', 'söi', 'söimme', 'söitte', 'söivät']);
         expectPositiveConjugations('olla', ['olin', 'olit', 'oli', 'olimme', 'olitte', 'olivat']);
     });
      describe('conjugateNegation(infinitive, person)', function() {
