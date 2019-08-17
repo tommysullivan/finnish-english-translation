@@ -1,15 +1,15 @@
 module.exports = function(toBeInfinitive, space, emptyString) {
     return {
         conjugate: function(infinitive, pronoun) {
-            var strongStem = infinitive.getStrongStem();
-            var weakStem = infinitive.getWeakStem()
-            var endsInDa = infinitive.endsWith('da') || infinitive.endsWith('dä'); 
-            var letterToAppendToThirdPerson = endsInDa && infinitive.charFromEnd(3).isVowel()
+            const strongStem = infinitive.getStrongStem();
+            const weakStem = infinitive.getWeakStem()
+            const endsInDa = infinitive.endsWith('da') || infinitive.endsWith('dä'); 
+            const letterToAppendToThirdPerson = endsInDa && infinitive.charFromEnd(3).isVowel()
                 ? emptyString 
                 : infinitive.equals(toBeInfinitive)
                     ? 'n' 
                     : strongStem.last();
-            var aToUse = strongStem.contains('ä') || strongStem.contains('ö') ? 'ä' : 'a';
+            const aToUse = strongStem.contains('ä') || strongStem.contains('ö') ? 'ä' : 'a';
             if(pronoun.isSingular()) {
                 if(pronoun.isFirstPerson()) return weakStem + 'n';
                 if(pronoun.isSecondPerson()) return weakStem + 't';
@@ -22,7 +22,7 @@ module.exports = function(toBeInfinitive, space, emptyString) {
             }
         },
         conjugateNegation: function(infinitive, pronoun) {
-            var stemInNegation = infinitive.getWeakStem();
+            const stemInNegation = infinitive.getWeakStem();
             return pronoun.getNoWord(pronoun)+space+stemInNegation;
             
         }

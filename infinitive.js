@@ -10,7 +10,7 @@ module.exports = function(infinitiveWord, collectionOfVerbConfigurations, wordFa
             return wordFactory.createWord(getDesiredVerbConfiguration(infinitiveWord)[2]);
         },
         getStemForPerfectConjugation: function() {
-            var doubleStem = getDesiredVerbConfiguration(infinitiveWord)[3];
+            const doubleStem = getDesiredVerbConfiguration(infinitiveWord)[3];
             return wordFactory.createWord(doubleStem!=undefined ? doubleStem : this.getStrongStem(infinitiveWord));
         },
         toString: infinitiveWord.toString,

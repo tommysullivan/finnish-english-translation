@@ -4,12 +4,12 @@ module.exports = function(collectionOfSimpleTransformRules, ruleToApplyIfNoRules
             function doesRuleApplyToStem(rule) {
                 return rule.applies(inputWord);
             }
-            var applicableRules = collectionOfSimpleTransformRules.filter(doesRuleApplyToStem);
+            const applicableRules = collectionOfSimpleTransformRules.filter(doesRuleApplyToStem);
             if(applicableRules.isEmpty()) return ruleToApplyIfNoRulesAreApplicable.apply(inputWord);
             function applyRuleToStem(rule) {
                 return rule.apply(inputWord);
             }
-            var resultCandidates = applicableRules.map(applyRuleToStem);
+            const resultCandidates = applicableRules.map(applyRuleToStem);
             if(resultCandidates.unique().length() != 1) {
                 throw new Error(
                     "Multiple rules applied and gave different results for inputWord "+inputWord+"\n"+

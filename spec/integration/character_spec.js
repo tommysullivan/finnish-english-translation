@@ -1,6 +1,6 @@
-var Character = require('../../character');
-var Collection = require('collections').Collection;
-var Predicates = require('../../predicates');
+const Character = require('../../character');
+const Collection = require('collections').Collection;
+const Predicates = require('../../predicates');
 
 describe('Character', function() {
    describe('isVowel', function() {
@@ -19,7 +19,7 @@ describe('Character', function() {
                 });
             }); 
             describe('and we check if f is a vowel', function() {
-                it('returns true', function() {
+                it('returns false', function() {
                     expect(createCharacter('f').isVowel()).toBeFalsy();
                 });
             }); 

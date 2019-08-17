@@ -2,10 +2,22 @@
   "name": "finnish-english-translation",
   "version": "0.0.1",
   "description": "Studying Finnish to English translation through TDD",
-  "authors": ["Tommy Sullivan <tom@tommysullivan.me>", "Esa-Matti Tastula <tastulae@mail.usf.edu>"],
+  "authors": [
+    "Tommy Sullivan <tom@tommysullivan.me>",
+    "Esa-Matti Tastula <tastulae@mail.usf.edu>"
+  ],
+  "scripts": {
+    "jasmineTest": "jasmine-node spec/**/* --verbose",
+    "test": "ts-mocha spec/**/* --watch --watch-extensions ts --verbose"
+  },
   "repository": "https://github.com/vitenter/finnish-english-translation",
   "dependencies": {
-    "collections": "vitenter/collections"
+    "@types/mocha": "^5.2.7",
+    "collections": "vitenter/collections",
+    "expect": "^24.9.0",
+    "mocha": "^6.2.0",
+    "ts-mocha": "^6.0.0",
+    "typescript": "^3.5.3"
   },
   "devDependencies": {
     "jasmine-node": "1.14.5"

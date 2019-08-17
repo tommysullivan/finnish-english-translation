@@ -13,7 +13,7 @@ module.exports = function(participleHelper, space) {
             }
         },
         conjugateNegation: function(infinitive, pronoun) {
-            var participle = participleHelper.getSecondParticiple(infinitive, pronoun);
+            const participle = participleHelper.getSecondParticiple(infinitive, pronoun);
             return pronoun.getNoWord()+space+participle;
         }
     }

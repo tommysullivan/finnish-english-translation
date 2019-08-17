@@ -1,14 +1,15 @@
-var FinnishEnglishTranslation = require('../../finnishEnglishTranslation');
-var finnishEnglishTranslation = FinnishEnglishTranslation();
-var pluralizer = finnishEnglishTranslation.createPluralizer();
-var fs = require('fs');
-var stemPluralPairs = JSON.parse(fs.readFileSync('./spec/integration/test-data/stem-plural-pairs.json'));
+const FinnishEnglishTranslation = require('../../finnishEnglishTranslation');
+const finnishEnglishTranslation = FinnishEnglishTranslation();
+const pluralizer = finnishEnglishTranslation.createPluralizer();
+const fs = require('fs');
+const stemPluralPairs = JSON.parse(fs.readFileSync('./spec/integration/test-data/stem-plural-pairs.json'));
+const expect = require("expect")
 
 describe('Pluralizer', function() {
     describe('pluralize for stem', function() {
         stemPluralPairs.forEach(function(stemPluralPair) {
-            var stem = stemPluralPair[0];
-            var expectedPlural = stemPluralPair[1];
+            const stem = stemPluralPair[0];
+            const expectedPlural = stemPluralPair[1];
             describe(stem, function() {
                 it('gives '+expectedPlural, function() {
                     expect(pluralizer.pluralize(stem)).toEqual(expectedPlural);

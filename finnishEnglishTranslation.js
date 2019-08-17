@@ -1,35 +1,35 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var Collection = require('collections').Collection;
-var SimpleTransformRule = require('./simpleTransformRule');
-var Pluralizer = require('./pluralizer');
-var RuleApplier = require('./ruleApplier');
-var ComplexityAnalyzer = require('./complexityAnalyzer');
-var RuleLoader = require('./ruleLoader');
-var RuleThatAppendsString = require('./ruleThatAppendsString');
-var RuleDecorator = require('./ruleDecorator');
-var PresentTenseConjugator = require('./presentTenseConjugator');
-var Predicates = require('./predicates');
-var Infinitive = require('./infinitive');
-var PerfectTenseConjugator = require('./perfectTenseConjugator');
-var ImperfectTenseConjugator = require('./imperfectTenseConjugator');
-var ParticipleHelper = require('./participleHelper');
-var PluperfectTenseConjugator = require('./pluperfectTenseConjugator');
-var Word = require('./word');
-var Character = require('./character');
-var Pronoun = require('./pronoun');
+const Collection = require('collections').Collection;
+const SimpleTransformRule = require('./simpleTransformRule');
+const Pluralizer = require('./pluralizer');
+const RuleApplier = require('./ruleApplier');
+const ComplexityAnalyzer = require('./complexityAnalyzer');
+const RuleLoader = require('./ruleLoader');
+const RuleThatAppendsString = require('./ruleThatAppendsString');
+const RuleDecorator = require('./ruleDecorator');
+const PresentTenseConjugator = require('./presentTenseConjugator');
+const Predicates = require('./predicates');
+const Infinitive = require('./infinitive');
+const PerfectTenseConjugator = require('./perfectTenseConjugator');
+const ImperfectTenseConjugator = require('./imperfectTenseConjugator');
+const ParticipleHelper = require('./participleHelper');
+const PluperfectTenseConjugator = require('./pluperfectTenseConjugator');
+const Word = require('./word');
+const Character = require('./character');
+const Pronoun = require('./pronoun');
 
-var pluralRulesPath = './configuration/plural-rules.json';
-var stemRulesPath = './configuration/stem-rules.json';
+const pluralRulesPath = './configuration/plural-rules.json';
+const stemRulesPath = './configuration/stem-rules.json';
 
-var firstPersonPronounCollection = Collection(['minä','me']);
-var secondPersonPronounCollection = Collection(['sinä','te']);
-var pluralPronounCollection = Collection(['me','te','he']);
-var toBeInfinitiveString = 'olla';
-var vowelCollection = Collection(['a','e','i','o','u','y','ä','ö']);
-var space = ' ';
-var emptyString = '';
-var pluralEndingLetter = 't';
+const firstPersonPronounCollection = Collection(['minä','me']);
+const secondPersonPronounCollection = Collection(['sinä','te']);
+const pluralPronounCollection = Collection(['me','te','he']);
+const toBeInfinitiveString = 'olla';
+const vowelCollection = Collection(['a','e','i','o','u','y','ä','ö']);
+const space = ' ';
+const emptyString = '';
+const pluralEndingLetter = 't';
 
 module.exports = function() {
     function createRuleLoader() {
@@ -40,13 +40,16 @@ module.exports = function() {
     }
     return {
         createPluralizer: function() {
-            var collectionOfSimpleTransformRules = createRuleLoader().loadRules(pluralRulesPath);
-            var ruleThatAppendsT = RuleThatAppendsString(pluralEndingLetter);
+            const collectionOfSimpleTransformRules = createRuleLoader().loadRules(pluralRulesPath);
+            const ruleThatAppendsT = RuleThatAppendsString(pluralEndingLetter);
             function addTAppendBehaviorToRule(rule) {
                 return RuleDecorator(rule, ruleThatAppendsT);
             }
-            collectionOfSimpleTransformRules = collectionOfSimpleTransformRules.map(addTAppendBehaviorToRule);
-            return Pluralizer(ComplexityAnalyzer(collectionOfSimpleTransformRules), RuleApplier(collectionOfSimpleTransformRules, ruleThatAppendsT));
+            const rulesWithTAppendBehaviorAdded = collectionOfSimpleTransformRules.map(addTAppendBehaviorToRule);
+            return Pluralizer(ComplexityAnalyzer(
+                rulesWithTAppendBehaviorAdded), 
+                RuleApplier(rulesWithTAppendBehaviorAdded, ruleThatAppendsT
+            ))
         },
         createPresentTenseConjugator: function() {
             return PresentTenseConjugator(this.createToBeInfinitive(), space, emptyString);
@@ -64,9 +67,9 @@ module.exports = function() {
             return this.createInfinitive(toBeInfinitiveString);  
         },
         createInfinitive: function(infinitiveString) {
-            var stemRulesFileContent = fs.readFileSync(stemRulesPath);
-            var arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
-            var collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
+            const stemRulesFileContent = fs.readFileSync(stemRulesPath);
+            const arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent);
+            const collectionOfVerbConfigurations = Collection(arrayOfVerbConfigurations);
             return Infinitive(this.createWord(infinitiveString), collectionOfVerbConfigurations, this);
         },
         createChar: function(char) {
