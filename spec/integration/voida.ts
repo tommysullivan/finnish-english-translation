@@ -1,4 +1,4 @@
-const voida = {
+export const voida = {
     infinitive: "voida",
     meaning: "to be able to",
     presentTense: {
@@ -8,5 +8,4 @@ const voida = {
     perfectTense: {
         positive: ['olen voinut', 'olet voinut', 'on voinut', 'olemme voineet', 'olette voineet', 'ovat voineet']
     }
-};
-exports.voida = voida;
+}

@@ -1,4 +1,4 @@
-const soutaa = {
+export const soutaa = {
     infinitive: "soutaa",
     meaning: "to row",
     presentTense: {
@@ -8,5 +8,4 @@ const soutaa = {
     perfectTense: {
         positive: ['olen soutanut', 'olet soutanut', 'on soutanut', 'olemme soutaneet', 'olette soutaneet', 'ovat soutaneet']
     }
-};
-exports.soutaa = soutaa;
+}

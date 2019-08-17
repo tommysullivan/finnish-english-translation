@@ -1,4 +1,4 @@
-const syödä = {
+export const syödä = {
     infinitive: "syödä",
     meaning: "to eat",
     presentTense: {
@@ -8,5 +8,4 @@ const syödä = {
     perfectTense: {
         positive: ['olen syönyt', 'olet syönyt', 'on syönyt', 'olemme syöneet', 'olette syöneet', 'ovat syöneet']
     }
-};
-exports.syödä = syödä;
+}

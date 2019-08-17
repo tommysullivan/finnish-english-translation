@@ -1,4 +1,4 @@
-const nähdä = {
+export const nähdä = {
     infinitive: "nähdä",
     meaning: "to see",
     presentTense: {
@@ -8,5 +8,4 @@ const nähdä = {
     perfectTense: {
         positive: ['olen nähnyt', 'olet nähnyt', 'on nähnyt', 'olemme nähneet', 'olette nähneet', 'ovat nähneet']
     }
-};
-exports.nähdä = nähdä;
+}

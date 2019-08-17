@@ -1,4 +1,4 @@
-const kokea = {
+export const kokea = {
     infinitive: "kokea",
     meaning: "to experience / feel",
     presentTense: {
@@ -8,5 +8,4 @@ const kokea = {
     perfectTense: {
         positive: ['olen kokenut', 'olet kokenut', 'on kokenut', 'olemme kokeneet', 'olette kokeneet', 'ovat kokeneet']
     }
-};
-exports.kokea = kokea;
+}

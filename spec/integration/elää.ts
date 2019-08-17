@@ -1,4 +1,4 @@
-const elää = {
+export const elää = {
     infinitive: "elää",
     meaning: "don't do something",
     presentTense: {
@@ -8,5 +8,4 @@ const elää = {
     perfectTense: {
         positive: ['olen elänyt', 'olet elänyt', 'on elänyt', 'olemme eläneet', 'olette eläneet', 'ovat eläneet']
     }
-};
-exports.elää = elää;
+}

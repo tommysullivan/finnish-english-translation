@@ -1,4 +1,4 @@
-const olla = {
+export const olla = {
     infinitive: "olla",
     meaning: "to be",
     presentTense: {
@@ -8,5 +8,4 @@ const olla = {
     perfectTense: {
         positive: ['olen ollut', 'olet ollut', 'on ollut', 'olemme olleet', 'olette olleet', 'ovat olleet']
     }
-};
-exports.olla = olla;
+}

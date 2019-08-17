@@ -1,4 +1,4 @@
-const takellella = {
+export const takellella = {
     infinitive: "takellella",
     meaning: "to stammer",
     presentTense: {
@@ -8,5 +8,4 @@ const takellella = {
     perfectTense: {
         positive: ['olen takellellut', 'olet takellellut', 'on takellellut', 'olemme takellelleet', 'olette takellelleet', 'ovat takellelleet']
     }
-};
-exports.takellella = takellella;
+}
