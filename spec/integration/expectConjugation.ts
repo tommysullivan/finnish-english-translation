@@ -1,6 +1,7 @@
 import FinnishEnglishTranslation from '../../finnishEnglishTranslation';
+import expect from "expect"
 
-export const expectConjugation = (infinitiveString, pronounString, expected, conjugate) => {
+export const expectConjugation = (infinitiveString:string, pronounString:string, expected:string, conjugate:any) => {
     describe(`and pronoun is ${pronounString}`, () => {
         it(`should be ${expected}`, () => {
             const infinitive = FinnishEnglishTranslation().createInfinitive(infinitiveString);

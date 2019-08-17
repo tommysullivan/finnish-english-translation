@@ -1,6 +1,7 @@
 const Character = require('../../character');
 const Collection = require('collections').Collection;
 const Predicates = require('../../predicates');
+import expect from 'expect'
 
 describe('Character', function() {
    describe('isVowel', function() {
