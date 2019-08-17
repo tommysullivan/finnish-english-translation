@@ -7,8 +7,8 @@
     "Esa-Matti Tastula <tastulae@mail.usf.edu>"
   ],
   "scripts": {
-    "jasmineTest": "jasmine-node spec/**/* --verbose",
-    "test": "ts-mocha spec/**/* --watch --watch-extensions ts --verbose"
+    "test": "ts-mocha spec/**/* --watch --watch-extensions ts --verbose",
+    "testWatch": "ts-mocha spec/**/* --verbose"
   },
   "repository": "https://github.com/vitenter/finnish-english-translation",
   "dependencies": {
@@ -19,7 +19,5 @@
     "ts-mocha": "^6.0.0",
     "typescript": "^3.5.3"
   },
-  "devDependencies": {
-    "jasmine-node": "1.14.5"
-  }
+  "devDependencies": {}
 }
