@@ -1,4 +1,4 @@
-[
+export const stemPluralPairs = [
     ["pyykki", "pyykit"],
     ["tuttu", "tutut"],
     ["kuivausrumpu", "kuivausrummut"],
