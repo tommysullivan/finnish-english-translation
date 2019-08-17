@@ -1,4 +1,4 @@
-module.exports = function(characterString, vowelCollection, predicates) {
+export default function Character(characterString:string, vowelCollection:any, predicates:any) {
     return {
         isVowel: function() {
             return vowelCollection.any(predicates.equals(characterString.toLowerCase()));
@@ -6,8 +6,8 @@ module.exports = function(characterString, vowelCollection, predicates) {
         toString: function() {
             return characterString;
         },
-        equals: function(otherChar) {
-            return characterString==otherChar.toString();
+        equals: function(otherChar:any) {
+            return characterString == otherChar.toString();
         }
     }   
 }

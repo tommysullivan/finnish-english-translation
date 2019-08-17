@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 const Collection = require('collections').Collection;
 const SimpleTransformRule = require('./simpleTransformRule');
 const Pluralizer = require('./pluralizer');
@@ -16,7 +15,7 @@ const ImperfectTenseConjugator = require('./imperfectTenseConjugator');
 const ParticipleHelper = require('./participleHelper');
 const PluperfectTenseConjugator = require('./pluperfectTenseConjugator');
 const Word = require('./word');
-const Character = require('./character');
+const Character = require('./character').default;
 const Pronoun = require('./pronoun');
 
 const pluralRulesPath = './configuration/plural-rules.json';
