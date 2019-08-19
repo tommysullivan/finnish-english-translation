@@ -14,8 +14,8 @@ import { Character } from "./Character"
 import { PresentTenseConjugator } from "./PresentTenseConjugator"
 import { RuleApplier } from "./RuleApplier"
 import { RuleDecorator } from "./RuleDecorator"
+import { RuleLoader } from "./RuleLoader"
 
-const RuleLoader = require('./ruleLoader')
 const RuleThatAppendsString = require('./ruleThatAppendsString')
 const Word = require('./word')
 
@@ -27,13 +27,11 @@ const secondPersonPronounCollection = new Collection(['sinä','te'])
 const pluralPronounCollection = new Collection(['me','te','he'])
 const toBeInfinitiveString = 'olla'
 const vowelCollection = new Collection(['a','e','i','o','u','y','ä','ö'])
-const space = ' '
-const emptyString = ''
 const pluralEndingLetter = 't'
 
 module.exports = function() {
     function createRuleLoader() {
-        return RuleLoader(Collection, SimpleTransformRule, fs)
+        return new RuleLoader()
     }
     function createParticipleHelper() {
         return new ParticipleHelper()
@@ -58,7 +56,7 @@ module.exports = function() {
             return new PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive())
         },
         createImperfectTenseConjugator: function() {
-            return new ImperfectTenseConjugator(createParticipleHelper(), space)
+            return new ImperfectTenseConjugator(createParticipleHelper())
         },
         createPluperfectTenseConjugator: function() {
             return new PluperfectTenseConjugator(
