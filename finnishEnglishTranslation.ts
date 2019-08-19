@@ -1,6 +1,8 @@
 import fs from "fs"
 import { Collection } from "collections"
-import { ComplexityAnalyzer } from "./complexityAnalyzer";
+import { ComplexityAnalyzer } from "./complexityAnalyzer"
+import { ImperfectTenseConjugator } from "./imperfectTenseConjugator"
+
 const SimpleTransformRule = require('./simpleTransformRule')
 const Pluralizer = require('./pluralizer')
 const RuleApplier = require('./ruleApplier')
@@ -11,7 +13,6 @@ const PresentTenseConjugator = require('./presentTenseConjugator')
 const Predicates = require('./predicates')
 const Infinitive = require('./infinitive')
 const PerfectTenseConjugator = require('./perfectTenseConjugator')
-const ImperfectTenseConjugator = require('./imperfectTenseConjugator')
 const ParticipleHelper = require('./participleHelper')
 const PluperfectTenseConjugator = require('./pluperfectTenseConjugator')
 const Word = require('./word')
@@ -57,7 +58,7 @@ module.exports = function() {
             return PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive(), space)
         },
         createImperfectTenseConjugator: function() {
-            return ImperfectTenseConjugator(createParticipleHelper(), space)
+            return new ImperfectTenseConjugator(createParticipleHelper(), space)
         },
         createPluperfectTenseConjugator: function() {
             return PluperfectTenseConjugator(this.createImperfectTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive(), space)
@@ -65,7 +66,7 @@ module.exports = function() {
         createToBeInfinitive: function() {
             return this.createInfinitive(toBeInfinitiveString)  
         },
-        createInfinitive: function(infinitiveString) {
+        createInfinitive: function(infinitiveString:any) {
             const stemRulesFileContent = fs.readFileSync(stemRulesPath)
             const arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent)
             const collectionOfVerbConfigurations = new Collection(arrayOfVerbConfigurations)
