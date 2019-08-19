@@ -10,6 +10,7 @@ import { SimpleTransformRule } from "./SimpleTransformRule"
 import { Pluralizer } from "./Pluralizer"
 import { PluperfectTenseConjugator } from "./PluperfectTenseConjugator"
 import { Predicates } from "./Predicates"
+import { Character } from "./Character"
 
 const RuleApplier = require('./ruleApplier')
 const RuleLoader = require('./ruleLoader')
@@ -17,7 +18,6 @@ const RuleThatAppendsString = require('./ruleThatAppendsString')
 const RuleDecorator = require('./ruleDecorator')
 const PresentTenseConjugator = require('./presentTenseConjugator')
 const Word = require('./word')
-const Character = require('./character').default
 
 const pluralRulesPath = './configuration/plural-rules.json'
 const stemRulesPath = './configuration/stem-rules.json'
@@ -79,7 +79,7 @@ module.exports = function() {
             return new Infinitive(this.createWord(infinitiveString), collectionOfVerbConfigurations, this)
         },
         createChar: function(char:string) {
-            return Character(char, vowelCollection, new Predicates())
+            return new Character(char, vowelCollection, new Predicates())
         },
         createWord: function(wordString:string) {
             return Word(wordString, this, this)
