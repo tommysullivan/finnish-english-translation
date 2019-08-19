@@ -1,4 +1,4 @@
-import { Infinitive } from "./infinitive";
+import { Infinitive } from "./Infinitive";
 
 export class ParticipleHelper {
     getSecondParticiple = (infinitive:Infinitive, pronoun:any) => {

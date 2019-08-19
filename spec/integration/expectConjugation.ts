@@ -1,4 +1,4 @@
-import FinnishEnglishTranslation from '../../finnishEnglishTranslation';
+import FinnishEnglishTranslation from '../../FinnishEnglishTranslation';
 import expect from "expect"
 
 export const expectConjugation = (infinitiveString:string, pronounString:string, expected:string, conjugate:any) => {

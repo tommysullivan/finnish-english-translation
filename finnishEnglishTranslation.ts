@@ -1,13 +1,14 @@
 import fs from "fs"
 import { Collection } from "collections"
 import { ComplexityAnalyzer } from "./ComplexityAnalyzer"
-import { ImperfectTenseConjugator } from "./imperfectTenseConjugator"
-import { Infinitive } from "./infinitive"
+import { ImperfectTenseConjugator } from "./ImperfectTenseConjugator"
+import { Infinitive } from "./Infinitive"
 import { ParticipleHelper } from "./ParticipleHelper"
 import { PerfectTenseConjugator } from "./PerfectTenseConjugator"
 import { Pronoun } from "./Pronoun"
 import { SimpleTransformRule } from "./SimpleTransformRule"
 import { Pluralizer } from "./Pluralizer"
+import { PluperfectTenseConjugator } from "./PluperfectTenseConjugator"
 
 const RuleApplier = require('./ruleApplier')
 const RuleLoader = require('./ruleLoader')
@@ -15,7 +16,6 @@ const RuleThatAppendsString = require('./ruleThatAppendsString')
 const RuleDecorator = require('./ruleDecorator')
 const PresentTenseConjugator = require('./presentTenseConjugator')
 const Predicates = require('./predicates')
-const PluperfectTenseConjugator = require('./pluperfectTenseConjugator')
 const Word = require('./word')
 const Character = require('./character').default
 
@@ -63,7 +63,11 @@ module.exports = function() {
             return new ImperfectTenseConjugator(createParticipleHelper(), space)
         },
         createPluperfectTenseConjugator: function() {
-            return PluperfectTenseConjugator(this.createImperfectTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive(), space)
+            return new PluperfectTenseConjugator(
+                this.createImperfectTenseConjugator(), 
+                createParticipleHelper(),
+                this.createToBeInfinitive()
+            )
         },
         createToBeInfinitive: function() {
             return this.createInfinitive(toBeInfinitiveString)  

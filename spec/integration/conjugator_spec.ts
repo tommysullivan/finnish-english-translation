@@ -1,7 +1,7 @@
 import { expectConjugation } from "./expectConjugation"
 import { verbs } from "./verbs"
 import { pronouns } from "./pronouns"
-import FinnishEnglishTranslation from '../../finnishEnglishTranslation'
+import FinnishEnglishTranslation from '../../FinnishEnglishTranslation'
 
 const presentTenseConjugator = () => FinnishEnglishTranslation().createPresentTenseConjugator()
 const expectPositiveConjugations = 

@@ -1,4 +1,4 @@
-import { Infinitive } from "./infinitive"
+import { Infinitive } from "./Infinitive"
 
 export class PerfectTenseConjugator {
     constructor(private presentTenseConjugator:any, private participleHelper, private toBeInfinitive:Infinitive) {}
