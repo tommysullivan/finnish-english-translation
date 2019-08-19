@@ -2,6 +2,7 @@ import fs from "fs"
 import { Collection } from "collections"
 import { ComplexityAnalyzer } from "./complexityAnalyzer"
 import { ImperfectTenseConjugator } from "./imperfectTenseConjugator"
+import { Infinitive } from "./infinitive"
 
 const SimpleTransformRule = require('./simpleTransformRule')
 const Pluralizer = require('./pluralizer')
@@ -11,7 +12,6 @@ const RuleThatAppendsString = require('./ruleThatAppendsString')
 const RuleDecorator = require('./ruleDecorator')
 const PresentTenseConjugator = require('./presentTenseConjugator')
 const Predicates = require('./predicates')
-const Infinitive = require('./infinitive')
 const PerfectTenseConjugator = require('./perfectTenseConjugator')
 const ParticipleHelper = require('./participleHelper')
 const PluperfectTenseConjugator = require('./pluperfectTenseConjugator')
@@ -67,18 +67,18 @@ module.exports = function() {
             return this.createInfinitive(toBeInfinitiveString)  
         },
         createInfinitive: function(infinitiveString:any) {
-            const stemRulesFileContent = fs.readFileSync(stemRulesPath)
+            const stemRulesFileContent = fs.readFileSync(stemRulesPath).toString()
             const arrayOfVerbConfigurations = JSON.parse(stemRulesFileContent)
             const collectionOfVerbConfigurations = new Collection(arrayOfVerbConfigurations)
-            return Infinitive(this.createWord(infinitiveString), collectionOfVerbConfigurations, this)
+            return new Infinitive(this.createWord(infinitiveString), collectionOfVerbConfigurations, this)
         },
-        createChar: function(char) {
+        createChar: function(char:string) {
             return Character(char, vowelCollection, Predicates())
         },
-        createWord: function(wordString) {
+        createWord: function(wordString:string) {
             return Word(wordString, this, this)
         },
-        createPronoun: function(pronounString) {
+        createPronoun: function(pronounString:string) {
             return Pronoun(pronounString, pluralPronounCollection, firstPersonPronounCollection, secondPersonPronounCollection)
         }
     }
