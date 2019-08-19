@@ -1,0 +1,1 @@
+export const pronouns = ['minä', 'sinä', 'hän / se', 'me', 'te', 'he']
