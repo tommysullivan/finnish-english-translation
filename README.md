@@ -27,6 +27,7 @@ the different pronouns as well as the tenses, with negation or otherwise.
     - Remove all mutation
     - Break files into smaller pieces
     - Make the array based definitions / configurations more self-evident
+    - Update API to be more of a DSL (use getters, self-descriptive englishy nouns)
 - Features
     - Derive "stems" from "infinitives"
     - Add other tenses
