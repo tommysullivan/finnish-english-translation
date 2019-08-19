@@ -9,13 +9,13 @@ import { Pronoun } from "./Pronoun"
 import { SimpleTransformRule } from "./SimpleTransformRule"
 import { Pluralizer } from "./Pluralizer"
 import { PluperfectTenseConjugator } from "./PluperfectTenseConjugator"
+import { Predicates } from "./Predicates"
 
 const RuleApplier = require('./ruleApplier')
 const RuleLoader = require('./ruleLoader')
 const RuleThatAppendsString = require('./ruleThatAppendsString')
 const RuleDecorator = require('./ruleDecorator')
 const PresentTenseConjugator = require('./presentTenseConjugator')
-const Predicates = require('./predicates')
 const Word = require('./word')
 const Character = require('./character').default
 
@@ -79,7 +79,7 @@ module.exports = function() {
             return new Infinitive(this.createWord(infinitiveString), collectionOfVerbConfigurations, this)
         },
         createChar: function(char:string) {
-            return Character(char, vowelCollection, Predicates())
+            return Character(char, vowelCollection, new Predicates())
         },
         createWord: function(wordString:string) {
             return Word(wordString, this, this)
