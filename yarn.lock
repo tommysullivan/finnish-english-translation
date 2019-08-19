@@ -54,6 +54,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@types/expect@^1.20.4":
+  version "1.20.4"
+  resolved "https://registry.yarnpkg.com/@types/expect/-/expect-1.20.4.tgz#8288e51737bf7e3ab5d7c77bfa695883745264e5"
+  integrity sha512-Q5Vn3yjTDyCMV50TB6VRIbQNxSE4OmZR86VSbGaNpfUolm0iePBB4KdEEHmxoY5sT2+2DIvXW0rvMDP2nHZ4Mg==
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.1.tgz#42995b446db9a48a11a07ec083499a860e9138ff"
@@ -83,6 +88,11 @@
   version "5.2.7"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-5.2.7.tgz#315d570ccb56c53452ff8638738df60726d5b6ea"
   integrity sha512-NYrtPht0wGzhwe9+/idPaBB+TqkY9AhTvOLMkThm0IoEfLaiVQZwBwyJ5puCkO3AUCWrmcoePjp2mbFocKy4SQ==
+
+"@types/node@^12.7.2":
+  version "12.7.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
+  integrity sha512-dyYO+f6ihZEtNPDcWNR1fkoTDf3zAK3lAABDze3mz6POyIercH0lEUawUFXlG8xaQZmm1yEBON/4TsYv/laDYg==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -290,7 +300,14 @@ collection-visit@^1.0.0:
 
 collections@vitenter/collections:
   version "1.1.0"
-  resolved "https://codeload.github.com/vitenter/collections/tar.gz/4fa3533ff51f7883b3ffa219905734b68d9dbcfb"
+  resolved "https://codeload.github.com/vitenter/collections/tar.gz/9e43812d424623a520073a772e63718203c463f5"
+  dependencies:
+    "@types/expect" "^1.20.4"
+    "@types/mocha" "^5.2.7"
+    expect "^24.9.0"
+    mocha "^6.2.0"
+    ts-mocha "^6.0.0"
+    typescript "^3.5.3"
 
 color-convert@^1.9.0:
   version "1.9.3"
