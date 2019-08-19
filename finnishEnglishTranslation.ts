@@ -6,7 +6,6 @@ import { Infinitive } from "./Infinitive"
 import { ParticipleHelper } from "./ParticipleHelper"
 import { PerfectTenseConjugator } from "./PerfectTenseConjugator"
 import { Pronoun } from "./Pronoun"
-import { SimpleTransformRule } from "./SimpleTransformRule"
 import { Pluralizer } from "./Pluralizer"
 import { PluperfectTenseConjugator } from "./PluperfectTenseConjugator"
 import { Predicates } from "./Predicates"
@@ -16,8 +15,7 @@ import { RuleApplier } from "./RuleApplier"
 import { RuleDecorator } from "./RuleDecorator"
 import { RuleLoader } from "./RuleLoader"
 import { Word } from "./Word"
-
-const RuleThatAppendsString = require('./ruleThatAppendsString')
+import { RuleThatAppendsString } from "./RuleThatAppendsString"
 
 const pluralRulesPath = './configuration/plural-rules.json'
 const stemRulesPath = './configuration/stem-rules.json'
@@ -39,7 +37,7 @@ module.exports = function() {
     return {
         createPluralizer: function() {
             const collectionOfSimpleTransformRules = createRuleLoader().loadRules(pluralRulesPath)
-            const ruleThatAppendsT = RuleThatAppendsString(pluralEndingLetter)
+            const ruleThatAppendsT = new RuleThatAppendsString(pluralEndingLetter)
             function addTAppendBehaviorToRule(rule:any) {
                 return new RuleDecorator(rule, ruleThatAppendsT)
             }
