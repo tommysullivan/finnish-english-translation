@@ -5,6 +5,7 @@ import { ImperfectTenseConjugator } from "./imperfectTenseConjugator"
 import { Infinitive } from "./infinitive"
 import { ParticipleHelper } from "./ParticipleHelper"
 import { PerfectTenseConjugator } from "./PerfectTenseConjugator"
+import { Pronoun } from "./Pronoun"
 
 const SimpleTransformRule = require('./simpleTransformRule')
 const Pluralizer = require('./pluralizer')
@@ -17,7 +18,6 @@ const Predicates = require('./predicates')
 const PluperfectTenseConjugator = require('./pluperfectTenseConjugator')
 const Word = require('./word')
 const Character = require('./character').default
-const Pronoun = require('./pronoun')
 
 const pluralRulesPath = './configuration/plural-rules.json'
 const stemRulesPath = './configuration/stem-rules.json'
@@ -79,7 +79,12 @@ module.exports = function() {
             return Word(wordString, this, this)
         },
         createPronoun: function(pronounString:string) {
-            return Pronoun(pronounString, pluralPronounCollection, firstPersonPronounCollection, secondPersonPronounCollection)
+            return new Pronoun(
+                pronounString,
+                pluralPronounCollection,
+                firstPersonPronounCollection,
+                secondPersonPronounCollection
+            )
         }
     }
 }

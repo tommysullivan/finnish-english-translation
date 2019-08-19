@@ -3,7 +3,7 @@ import { Infinitive } from "./infinitive"
 export class PerfectTenseConjugator {
     constructor(private presentTenseConjugator:any, private participleHelper, private toBeInfinitive:Infinitive) {}
 
-    conjugate = (infinitive, pronoun) => {
+    conjugate = (infinitive:Infinitive, pronoun) => {
         const conjugatedToBeVerb = this.presentTenseConjugator.conjugate(this.toBeInfinitive, pronoun)
         return `${conjugatedToBeVerb} ${this.participleHelper.getSecondParticiple(infinitive, pronoun)}`
     }
