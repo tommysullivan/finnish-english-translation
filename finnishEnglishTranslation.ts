@@ -12,8 +12,8 @@ import { PluperfectTenseConjugator } from "./PluperfectTenseConjugator"
 import { Predicates } from "./Predicates"
 import { Character } from "./Character"
 import { PresentTenseConjugator } from "./PresentTenseConjugator"
+import { RuleApplier } from "./RuleApplier"
 
-const RuleApplier = require('./ruleApplier')
 const RuleLoader = require('./ruleLoader')
 const RuleThatAppendsString = require('./ruleThatAppendsString')
 const RuleDecorator = require('./ruleDecorator')
@@ -47,10 +47,8 @@ module.exports = function() {
             }
             const rulesWithTAppendBehaviorAdded = collectionOfSimpleTransformRules.map(addTAppendBehaviorToRule)
             return new Pluralizer(
-                new ComplexityAnalyzer(
-                    rulesWithTAppendBehaviorAdded), 
-                    RuleApplier(rulesWithTAppendBehaviorAdded, ruleThatAppendsT
-                )
+                new ComplexityAnalyzer(rulesWithTAppendBehaviorAdded), 
+                new RuleApplier(rulesWithTAppendBehaviorAdded, ruleThatAppendsT)
             )
         },
         createPresentTenseConjugator: function() {
