@@ -3,6 +3,7 @@ import { Collection } from "collections"
 import { ComplexityAnalyzer } from "./complexityAnalyzer"
 import { ImperfectTenseConjugator } from "./imperfectTenseConjugator"
 import { Infinitive } from "./infinitive"
+import { ParticipleHelper } from "./ParticipleHelper"
 
 const SimpleTransformRule = require('./simpleTransformRule')
 const Pluralizer = require('./pluralizer')
@@ -13,7 +14,6 @@ const RuleDecorator = require('./ruleDecorator')
 const PresentTenseConjugator = require('./presentTenseConjugator')
 const Predicates = require('./predicates')
 const PerfectTenseConjugator = require('./perfectTenseConjugator')
-const ParticipleHelper = require('./participleHelper')
 const PluperfectTenseConjugator = require('./pluperfectTenseConjugator')
 const Word = require('./word')
 const Character = require('./character').default
@@ -36,7 +36,7 @@ module.exports = function() {
         return RuleLoader(Collection, SimpleTransformRule, fs)
     }
     function createParticipleHelper() {
-        return ParticipleHelper()
+        return new ParticipleHelper()
     }
     return {
         createPluralizer: function() {
