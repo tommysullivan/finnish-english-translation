@@ -17,7 +17,6 @@ using the following command:
 Run the tests to see how various verb infinitives are conjugated, given
 the different pronouns as well as the tenses, with negation or otherwise.
 
-    yarn
     yarn test
 
 # Next Steps 
