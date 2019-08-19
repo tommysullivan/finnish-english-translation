@@ -1,14 +1,14 @@
 import fs from "fs"
 import { Collection } from "collections"
-import { ComplexityAnalyzer } from "./complexityAnalyzer"
+import { ComplexityAnalyzer } from "./ComplexityAnalyzer"
 import { ImperfectTenseConjugator } from "./imperfectTenseConjugator"
 import { Infinitive } from "./infinitive"
 import { ParticipleHelper } from "./ParticipleHelper"
 import { PerfectTenseConjugator } from "./PerfectTenseConjugator"
 import { Pronoun } from "./Pronoun"
 import { SimpleTransformRule } from "./SimpleTransformRule"
+import { Pluralizer } from "./Pluralizer"
 
-const Pluralizer = require('./pluralizer')
 const RuleApplier = require('./ruleApplier')
 const RuleLoader = require('./ruleLoader')
 const RuleThatAppendsString = require('./ruleThatAppendsString')
@@ -46,10 +46,12 @@ module.exports = function() {
                 return RuleDecorator(rule, ruleThatAppendsT)
             }
             const rulesWithTAppendBehaviorAdded = collectionOfSimpleTransformRules.map(addTAppendBehaviorToRule)
-            return Pluralizer(new ComplexityAnalyzer(
-                rulesWithTAppendBehaviorAdded), 
-                RuleApplier(rulesWithTAppendBehaviorAdded, ruleThatAppendsT
-            ))
+            return new Pluralizer(
+                new ComplexityAnalyzer(
+                    rulesWithTAppendBehaviorAdded), 
+                    RuleApplier(rulesWithTAppendBehaviorAdded, ruleThatAppendsT
+                )
+            )
         },
         createPresentTenseConjugator: function() {
             return PresentTenseConjugator(this.createToBeInfinitive(), space, emptyString)
