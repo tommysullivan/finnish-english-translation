@@ -1,17 +1,18 @@
 import { expectConjugation } from "./expectConjugation"
 import { verbs } from "./verbs"
 import { pronouns } from "./pronouns"
-import FinnishEnglishTranslation from '../../FinnishEnglishTranslation'
+import { FinnishEnglishTranslation } from '../../FinnishEnglishTranslation'
+import { Conjugate } from "./Conjugate";
 
-const presentTenseConjugator = () => FinnishEnglishTranslation().createPresentTenseConjugator()
+const presentTenseConjugator = () => new FinnishEnglishTranslation().createPresentTenseConjugator()
 const expectPositiveConjugations = 
     (verb:any) => 
     expectInfinitiveConjugations(verb.infinitive, verb.presentTense.positive, presentTenseConjugator().conjugate)
 
-const expectInfinitiveConjugations = (infinitiveString:string, arrayOfExpectedConjugations:string[], shouldTestNegation:boolean) => {
+const expectInfinitiveConjugations = (infinitiveString:string, arrayOfExpectedConjugations:string[], conjugate:Conjugate) => {
     describe(`when infinitive is ${infinitiveString}`, () => {
         pronouns.forEach((pronounString, index) => {
-            expectConjugation(infinitiveString, pronounString, arrayOfExpectedConjugations[index], shouldTestNegation)
+            expectConjugation(infinitiveString, pronounString, arrayOfExpectedConjugations[index], conjugate)
         })
     })
 }
@@ -29,7 +30,7 @@ describe('PresentTenseConjugator', () => {
     })
 })
 
-const perfectTenseConjugator = () => FinnishEnglishTranslation().createPerfectTenseConjugator()
+const perfectTenseConjugator = () => new FinnishEnglishTranslation().createPerfectTenseConjugator()
 
 const expectPositivePerfectConjugations = 
     (infinitiveString:string, arrayOfExpectedConjugations:string[]) => 
@@ -55,7 +56,7 @@ describe('PerfectTenseConjugator', () => {
 })
 
 describe('ImperfectTenseConjugator', () => {
-    const imperfectTenseConjugator = FinnishEnglishTranslation().createImperfectTenseConjugator()
+    const imperfectTenseConjugator = new FinnishEnglishTranslation().createImperfectTenseConjugator()
     describe('conjugate(infinitive, person)', () => {
         const expectPositiveConjugations = (infinitiveString:string, arrayOfExpectedConjugations:string[]) => {
             expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, imperfectTenseConjugator.conjugate)    
@@ -85,7 +86,7 @@ describe('ImperfectTenseConjugator', () => {
 })
 
 describe('PluperfectTenseConjugator', () => {
-    const pluperfectTenseConjugator = FinnishEnglishTranslation().createPluperfectTenseConjugator()
+    const pluperfectTenseConjugator = new FinnishEnglishTranslation().createPluperfectTenseConjugator()
     describe('conjugate(infinitive, person)', () => {
         const expectPositiveConjugations = (infinitiveString:string, arrayOfExpectedConjugations:string[]) => {
             expectInfinitiveConjugations(infinitiveString, arrayOfExpectedConjugations, pluperfectTenseConjugator.conjugate)    

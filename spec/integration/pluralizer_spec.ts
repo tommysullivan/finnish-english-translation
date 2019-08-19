@@ -1,8 +1,8 @@
-import FinnishEnglishTranslation from '../../FinnishEnglishTranslation'
+import { FinnishEnglishTranslation } from '../../FinnishEnglishTranslation'
 import expect from "expect"
 import { stemPluralPairs } from "./test-data/stem-plural-pairs"
 
-const pluralizer = () => FinnishEnglishTranslation().createPluralizer()
+const pluralizer = () => new FinnishEnglishTranslation().createPluralizer()
 
 describe('Pluralizer', () => {
     describe('pluralize for stem', () => {
