@@ -1,6 +1,6 @@
 import { expectConjugation } from "../helpers/expectConjugation"
 import { verbs } from "../verbs"
-import { pronouns } from "../pronouns"
+import { pronouns } from "../../src/pronouns"
 import { FinnishEnglishTranslation } from '../../src/FinnishEnglishTranslation'
 import { Conjugate } from "../../src/Conjugate";
 
