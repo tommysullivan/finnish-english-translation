@@ -29,15 +29,7 @@ export class Pronoun {
         }
     }
 
-    isFirstPerson = () => {
-        return this.firstPersonPronounCollection.contains(this.pronounString.toLowerCase())
-    }
-
-    isSecondPerson = () => {
-        return this.secondPersonPronounCollection.contains(this.pronounString.toLowerCase())
-    }
-
-    isThirdPerson = () => {
-        return !(this.isFirstPerson || this.isSecondPerson())
-    }
+    isFirstPerson = () => this.firstPersonPronounCollection.contains(this.pronounString.toLowerCase())
+    isSecondPerson = () => this.secondPersonPronounCollection.contains(this.pronounString.toLowerCase())
+    isThirdPerson = () => !(this.isFirstPerson || this.isSecondPerson())
 }

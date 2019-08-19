@@ -1,21 +1,25 @@
-export class ImperfectTenseConjugator {
-    constructor(private participleHelper:any, private space:string) {}
+import { ParticipleHelper } from "./participleHelper"
+import { Infinitive } from "./infinitive"
+import { Pronoun } from "./Pronoun"
 
-    conjugate = (infinitive:any, pronoun:any) => {
+export class ImperfectTenseConjugator {
+    constructor(private participleHelper:ParticipleHelper) {}
+
+    conjugate = (infinitive:Infinitive, pronoun:Pronoun) => {
         if(pronoun.isSingular()) {
-            if(pronoun.isFirstPerson()) return 'olin';
-            if(pronoun.isSecondPerson()) return 'olit';
-            return 'oli';
+            if(pronoun.isFirstPerson()) return 'olin'
+            if(pronoun.isSecondPerson()) return 'olit'
+            return 'oli'
         }
         else {
-            if(pronoun.isFirstPerson()) return 'olimme';
-            if(pronoun.isSecondPerson()) return 'olitte';
-            return 'olivat';
+            if(pronoun.isFirstPerson()) return 'olimme'
+            if(pronoun.isSecondPerson()) return 'olitte'
+            return 'olivat'
         }
     }
 
-    conjugateNegation = (infinitive:any, pronoun:any) => {
-        const participle = this.participleHelper.getSecondParticiple(infinitive, pronoun);
-        return pronoun.getNoWord() + this.space + participle;
+    conjugateNegation = (infinitive:Infinitive, pronoun:Pronoun) => {
+        const participle = this.participleHelper.getSecondParticiple(infinitive, pronoun)
+        return `${pronoun.getNoWord()} ${participle}`
     }
 }

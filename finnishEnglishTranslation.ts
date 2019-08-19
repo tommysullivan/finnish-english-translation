@@ -11,12 +11,12 @@ import { Pluralizer } from "./Pluralizer"
 import { PluperfectTenseConjugator } from "./PluperfectTenseConjugator"
 import { Predicates } from "./Predicates"
 import { Character } from "./Character"
+import { PresentTenseConjugator } from "./PresentTenseConjugator"
 
 const RuleApplier = require('./ruleApplier')
 const RuleLoader = require('./ruleLoader')
 const RuleThatAppendsString = require('./ruleThatAppendsString')
 const RuleDecorator = require('./ruleDecorator')
-const PresentTenseConjugator = require('./presentTenseConjugator')
 const Word = require('./word')
 
 const pluralRulesPath = './configuration/plural-rules.json'
@@ -54,7 +54,7 @@ module.exports = function() {
             )
         },
         createPresentTenseConjugator: function() {
-            return PresentTenseConjugator(this.createToBeInfinitive(), space, emptyString)
+            return new PresentTenseConjugator(this.createToBeInfinitive())
         },
         createPerfectTenseConjugator: function() {
             return new PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive())

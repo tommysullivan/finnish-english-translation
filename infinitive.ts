@@ -1,7 +1,9 @@
+import { Collection } from "collections";
+
 export class Infinitive {
-    constructor(private infinitiveWord:any, private collectionOfVerbConfigurations:any, private wordFactory:any) {}
+    constructor(private infinitiveWord:any, private collectionOfVerbConfigurations:Collection, private wordFactory:any) {}
     
-    private getDesiredVerbConfiguration = (infinitiveWord) => {
+    private getDesiredVerbConfiguration = (infinitiveWord:any) => {
         return this.collectionOfVerbConfigurations.filter(
             (row:any) => row[0]==infinitiveWord.toString()
         ).first()
