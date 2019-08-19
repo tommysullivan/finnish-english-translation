@@ -15,9 +15,9 @@ import { PresentTenseConjugator } from "./PresentTenseConjugator"
 import { RuleApplier } from "./RuleApplier"
 import { RuleDecorator } from "./RuleDecorator"
 import { RuleLoader } from "./RuleLoader"
+import { Word } from "./Word"
 
 const RuleThatAppendsString = require('./ruleThatAppendsString')
-const Word = require('./word')
 
 const pluralRulesPath = './configuration/plural-rules.json'
 const stemRulesPath = './configuration/stem-rules.json'
@@ -78,7 +78,7 @@ module.exports = function() {
             return new Character(char, vowelCollection, new Predicates())
         },
         createWord: function(wordString:string) {
-            return Word(wordString, this, this)
+            return new Word(wordString, this, this)
         },
         createPronoun: function(pronounString:string) {
             return new Pronoun(
