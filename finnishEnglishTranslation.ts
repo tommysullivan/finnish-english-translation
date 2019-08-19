@@ -13,10 +13,10 @@ import { Predicates } from "./Predicates"
 import { Character } from "./Character"
 import { PresentTenseConjugator } from "./PresentTenseConjugator"
 import { RuleApplier } from "./RuleApplier"
+import { RuleDecorator } from "./RuleDecorator"
 
 const RuleLoader = require('./ruleLoader')
 const RuleThatAppendsString = require('./ruleThatAppendsString')
-const RuleDecorator = require('./ruleDecorator')
 const Word = require('./word')
 
 const pluralRulesPath = './configuration/plural-rules.json'
@@ -43,7 +43,7 @@ module.exports = function() {
             const collectionOfSimpleTransformRules = createRuleLoader().loadRules(pluralRulesPath)
             const ruleThatAppendsT = RuleThatAppendsString(pluralEndingLetter)
             function addTAppendBehaviorToRule(rule:any) {
-                return RuleDecorator(rule, ruleThatAppendsT)
+                return new RuleDecorator(rule, ruleThatAppendsT)
             }
             const rulesWithTAppendBehaviorAdded = collectionOfSimpleTransformRules.map(addTAppendBehaviorToRule)
             return new Pluralizer(
