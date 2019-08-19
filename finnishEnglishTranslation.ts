@@ -4,6 +4,7 @@ import { ComplexityAnalyzer } from "./complexityAnalyzer"
 import { ImperfectTenseConjugator } from "./imperfectTenseConjugator"
 import { Infinitive } from "./infinitive"
 import { ParticipleHelper } from "./ParticipleHelper"
+import { PerfectTenseConjugator } from "./PerfectTenseConjugator"
 
 const SimpleTransformRule = require('./simpleTransformRule')
 const Pluralizer = require('./pluralizer')
@@ -13,7 +14,6 @@ const RuleThatAppendsString = require('./ruleThatAppendsString')
 const RuleDecorator = require('./ruleDecorator')
 const PresentTenseConjugator = require('./presentTenseConjugator')
 const Predicates = require('./predicates')
-const PerfectTenseConjugator = require('./perfectTenseConjugator')
 const PluperfectTenseConjugator = require('./pluperfectTenseConjugator')
 const Word = require('./word')
 const Character = require('./character').default
@@ -55,7 +55,7 @@ module.exports = function() {
             return PresentTenseConjugator(this.createToBeInfinitive(), space, emptyString)
         },
         createPerfectTenseConjugator: function() {
-            return PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive(), space)
+            return new PerfectTenseConjugator(this.createPresentTenseConjugator(), createParticipleHelper(), this.createToBeInfinitive())
         },
         createImperfectTenseConjugator: function() {
             return new ImperfectTenseConjugator(createParticipleHelper(), space)
