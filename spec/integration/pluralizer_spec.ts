@@ -1,4 +1,4 @@
-import { FinnishEnglishTranslation } from '../../FinnishEnglishTranslation'
+import { FinnishEnglishTranslation } from '../../src/FinnishEnglishTranslation'
 import expect from "expect"
 import { stemPluralPairs } from "./test-data/stem-plural-pairs"
 
@@ -16,13 +16,13 @@ describe('Pluralizer', () => {
         })
     })
     describe('complexity', () => {
-        it('should be less than 25', () => {
-            expect(pluralizer().complexity()).toBeLessThan(300) 
+        it('should be less than 280', () => {
+            expect(pluralizer().complexity()).toBeLessThanOrEqual(280) 
         }) 
     })
     describe('number of rules', () => {
-        it('should be less than 10', () => {
-            expect(pluralizer().numTopLevelRules()).toBeLessThan(50)
+        it('should be less than 43', () => {
+            expect(pluralizer().numTopLevelRules()).toBeLessThanOrEqual(43)
         }) 
     })
 })

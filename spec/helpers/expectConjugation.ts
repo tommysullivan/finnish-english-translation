@@ -1,6 +1,6 @@
-import { FinnishEnglishTranslation } from '../../FinnishEnglishTranslation';
+import { FinnishEnglishTranslation } from '../../src/FinnishEnglishTranslation';
 import expect from "expect"
-import { Conjugate } from './Conjugate';
+import { Conjugate } from '../../src/Conjugate';
 
 export const expectConjugation = (infinitiveString:string, pronounString:string, expected:string, conjugate:Conjugate) => {
     describe(`and pronoun is ${pronounString}`, () => {

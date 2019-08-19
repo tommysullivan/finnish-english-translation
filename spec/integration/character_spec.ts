@@ -1,5 +1,5 @@
-import { expectVowel } from './expectVowel';
-import { expectConsonant } from './expectConsonant';
+import { expectVowel } from '../helpers/expectVowel';
+import { expectConsonant } from '../helpers/expectConsonant';
 
 describe('Character', () => {
    describe('isVowel', () => {
