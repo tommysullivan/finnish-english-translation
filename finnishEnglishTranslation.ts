@@ -6,8 +6,8 @@ import { Infinitive } from "./infinitive"
 import { ParticipleHelper } from "./ParticipleHelper"
 import { PerfectTenseConjugator } from "./PerfectTenseConjugator"
 import { Pronoun } from "./Pronoun"
+import { SimpleTransformRule } from "./SimpleTransformRule"
 
-const SimpleTransformRule = require('./simpleTransformRule')
 const Pluralizer = require('./pluralizer')
 const RuleApplier = require('./ruleApplier')
 const RuleLoader = require('./ruleLoader')

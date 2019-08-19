@@ -7,7 +7,7 @@ module.exports = function(Collection, SimpleTransformRule, fs) {
             function changeInnerArrayToSimpleTransformRule(arrayOfPreAndPostSuffix) {
                 const oldSuffix = arrayOfPreAndPostSuffix[0];
                 const newSuffix = arrayOfPreAndPostSuffix[1];
-                return SimpleTransformRule(oldSuffix, newSuffix);
+                return new SimpleTransformRule(oldSuffix, newSuffix);
             }
             return collectionOfArraysOfSuffices.map(changeInnerArrayToSimpleTransformRule);
         }
